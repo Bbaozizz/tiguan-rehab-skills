@@ -1,0 +1,32 @@
+name: Release Skill Bundles
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify tag and build
+        run: |
+          set -euo pipefail
+          VERSION="$(tr -d '[:space:]' < VERSION)"
+          test "${GITHUB_REF_NAME#v}" = "$VERSION"
+          python3 -m unittest discover -s tests -v
+          bash tools/build-skills.sh
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="$(tr -d '[:space:]' < VERSION)"
+          gh release create "$GITHUB_REF_NAME" \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes \
+            "dist/skills/tiguan-rehab.zip" \
+            "dist/skills/tiguan-assessment-session-design.zip" \
+            "dist/skills/tiguan-rehab-skills-${VERSION}.zip"

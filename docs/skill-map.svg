@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">体观康复 Skills 链接图</title>
+  <desc id="desc">从 GitHub 仓库首页和 README，通过安装与主入口，路由到评估课设计 Skill，最后交给康复师审核、执行与复测。</desc>
+  <defs>
+    <style>
+      .bg{fill:#f3efe4}.ink{fill:#17352d}.paper{fill:#fffdf6;stroke:#17352d;stroke-width:3}.plan{fill:#ece6d8;stroke:#8d8a80;stroke-width:2;stroke-dasharray:10 8}.accent{fill:#b1462f}.label{font:700 22px 'Noto Sans SC','PingFang SC',sans-serif;fill:#17352d}.small{font:500 15px 'Noto Sans SC','PingFang SC',sans-serif;fill:#68736d}.white{fill:#fffdf6}.line{stroke:#17352d;stroke-width:4;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0L12 6L0 12Z" class="ink"/></marker>
+  </defs>
+  <rect width="1200" height="900" class="bg"/>
+  <rect x="70" y="58" width="1060" height="84" class="ink"/>
+  <text x="105" y="110" font-family="Noto Serif SC,Songti SC,serif" font-size="34" font-weight="700" class="white">体观康复 Skills · 理解→安装→路由→执行→复测</text>
+  <rect x="90" y="210" width="220" height="126" class="paper"/><text x="122" y="255" class="label">介绍与信任</text><text x="122" y="286" class="small">GitHub 仓库首页</text><text x="122" y="312" class="small">README / 使用手册</text>
+  <path d="M310 273H410" class="line"/>
+  <rect x="430" y="210" width="220" height="126" class="paper"/><text x="464" y="255" class="label">安装与调用</text><text x="464" y="286" class="small">npx skills add</text><text x="464" y="312" class="small">Claude plugin / Release</text>
+  <path d="M650 273H750" class="line"/>
+  <rect x="770" y="210" width="340" height="126" class="paper"/><text x="810" y="255" class="label">/tiguan-rehab</text><text x="810" y="286" class="small">读取上下文·只路由已发布能力</text><text x="810" y="312" class="small">计划中 ≠ 已可下载</text>
+  <path d="M940 336V426" class="line"/>
+  <rect x="300" y="450" width="600" height="170" class="paper"/><rect x="300" y="450" width="14" height="170" class="accent"/><text x="348" y="500" class="label">/tiguan-assessment-session-design</text><text x="348" y="540" class="small">脱敏事实卡 · 客户可理解基线 · 相同条件复测</text><text x="348" y="570" class="small">一个生活行动 · 客户提醒草稿 · 可打印报告</text><text x="348" y="600" class="small">AI 整理与呈现，不决定临床内容</text>
+  <path d="M600 620V710" class="line"/>
+  <rect x="300" y="735" width="600" height="92" class="ink"/><text x="345" y="775" class="label white">康复师审核、真实执行、带回复测</text><text x="345" y="804" class="small white">文件成功 ≠ 临床成功 ≠ 业务闭环</text>
+  <rect x="940" y="450" width="170" height="170" class="plan"/><text x="973" y="493" class="label">路线图</text><text x="973" y="530" class="small">课后质询</text><text x="973" y="558" class="small">课后交付</text><text x="973" y="586" class="small">进度 / 经营</text>
+</svg>

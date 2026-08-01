@@ -1,0 +1,43 @@
+{
+  "name": "tiguan-rehab-skills",
+  "owner": {
+    "name": "Tguan Rehabilitation"
+  },
+  "metadata": {
+    "description": "体观康复公开 Skills：一个统一入口与一个可安装的评估课设计工作流。",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "tiguan-rehab",
+      "description": "体观康复 Skills 完整入口，安装当前已发布的全部能力。",
+      "source": "./",
+      "strict": true,
+      "version": "0.1.0",
+      "category": "healthcare-workflow",
+      "keywords": [
+        "rehabilitation",
+        "assessment",
+        "workflow",
+        "privacy",
+        "chinese"
+      ]
+    },
+    {
+      "name": "tiguan-assessment-session-design",
+      "description": "用脱敏信息设计可被客户理解、可复测、可转移到生活的评估课。",
+      "source": "./skills/tiguan-assessment-session-design",
+      "strict": true,
+      "version": "0.1.0",
+      "category": "healthcare-workflow",
+      "keywords": [
+        "rehabilitation",
+        "assessment-session",
+        "baseline",
+        "retest",
+        "client-report",
+        "chinese"
+      ]
+    }
+  ]
+}

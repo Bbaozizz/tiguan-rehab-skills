@@ -1,0 +1,9 @@
+{
+  "name": "tiguan-rehab",
+  "displayName": "体观康复 Skills",
+  "description": "体观康复公开工作流入口，包含评估课设计与隐私/临床边界。",
+  "skills": [
+    "./skills/tiguan-rehab",
+    "./skills/tiguan-assessment-session-design"
+  ]
+}

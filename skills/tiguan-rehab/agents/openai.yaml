@@ -1,0 +1,4 @@
+interface:
+  display_name: "体观康复 Skills"
+  short_description: "Route rehabilitation tasks to the right public workflow"
+  default_prompt: "Use $tiguan-rehab to route my de-identified rehabilitation workflow task."

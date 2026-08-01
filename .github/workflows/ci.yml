@@ -1,0 +1,35 @@
+name: Public Release Integrity
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned Claude Code CLI
+        run: npm install --global @anthropic-ai/claude-code@2.1.158
+      - name: Validate public contract
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 tools/check-publication-readiness.py
+      - name: Validate Skills
+        run: |
+          python3 tools/quick_validate_skill.py skills/tiguan-rehab
+          python3 tools/quick_validate_skill.py skills/tiguan-assessment-session-design
+          claude plugin validate .
+      - name: Build release bundle
+        run: bash tools/build-skills.sh
