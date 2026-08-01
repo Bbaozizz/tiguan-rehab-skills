@@ -4,7 +4,7 @@
 
 > 面向认真解决客户问题的康复专业人员。让 AI 接走整理、记录、呈现和复盘工作，不替代临床判断与责任。
 
-[![Version](https://img.shields.io/badge/version-0.1.1-17352D.svg?style=flat-square)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.1.2-17352D.svg?style=flat-square)](VERSION)
 [![skills.sh](https://skills.sh/b/Bbaozizz/tiguan-rehab-skills)](https://skills.sh/Bbaozizz/tiguan-rehab-skills)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC%204.0-B1462F.svg?style=flat-square)](LICENSE)
 
@@ -12,7 +12,7 @@
 
 这是由 [体观运动康复](https://tiguanrehab.cn/) 创建的公开 Skill 工具箱。首批将已在真实康复服务中重复出现的整理、呈现和复盘环节，抽成 2 个可安装、可验证的 Skills。
 
-**v0.1.1：** 新增 WorkBuddy 一键安装器。提供 `/tiguan-rehab` 统一入口与 `/tiguan-assessment-session-design` 评估课设计工作流，包含脱敏输入、合成案例、可打印报告和隐私/临床边界。
+**v0.1.2：** 课前输入升级为 10 题全选择问卷，并增加 Q01–Q10 字段映射。保留 WorkBuddy 一键安装、合成案例、可打印报告和隐私/临床边界。
 
 [快速开始](#快速开始) · [安装](#安装) · [能力一览](#能力一览) · [完整使用手册](docs/getting-started.md) · [开源路线图](#开源路线图) · [更新日志](https://github.com/Bbaozizz/tiguan-rehab-skills/releases)
 
@@ -24,7 +24,7 @@
 
 | 真实工作场景 | 当前可得到什么 |
 | --- | --- |
-| 信息很多，评估课前仍然只能从“哪里不舒服”开始 | 脱敏事实卡与证明已读材料的开场问题 |
+| 课前问卷太长，或收回了一堆无法准备评估的答案 | 10 题全选择模板、脱敏事实卡与证明已读材料的开场问题 |
 | 专业参数很多，客户不知道和自己有什么关系 | 客户能理解、下次能重复的功能基线 |
 | 当场有变化，容易被说成“找到原因” | 支持什么、不能证明什么的证据边界 |
 | 课后一次丢给客户太多动作 | 一个能回到生活、带回信息的主行动 |

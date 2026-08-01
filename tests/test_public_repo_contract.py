@@ -134,6 +134,24 @@ class PublicRepoContractTest(unittest.TestCase):
             self.assertRegex(text, rf"(?m)^name: {re.escape(name)}$")
             self.assertIn("description:", text)
 
+    def test_assessment_skill_uses_the_ten_question_intake_contract(self) -> None:
+        skill_dir = ROOT / "skills/tiguan-assessment-session-design"
+        questionnaire = (skill_dir / "assets/intake-questionnaire-template.md").read_text(
+            encoding="utf-8"
+        )
+        skill_text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+
+        self.assertEqual(
+            re.findall(r"(?m)^## Q\d{2}\uff5c", questionnaire),
+            [f"## Q{index:02d}\uff5c" for index in range(1, 11)],
+        )
+        self.assertIn("每题最多 6 个选项", questionnaire)
+        self.assertIn("可多选，最多选择 2 项", questionnaire)
+        self.assertIn("为了让康复师提前准备，你还有哪些资料可以提供？", questionnaire)
+        self.assertNotIn("你之前尝试过什么？", questionnaire)
+        self.assertIn("Q01–Q10 字段映射", skill_text)
+        self.assertIn("安全筛查未由该问卷完成", skill_text)
+
     def test_public_files_do_not_leak_private_runtime_details(self) -> None:
         forbidden_patterns = [
             r"/Users/apple/",

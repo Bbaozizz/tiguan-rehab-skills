@@ -4,7 +4,7 @@
 
 > Public, installable workflows for rehabilitation professionals who want AI to handle structuring, documentation, presentation, and review without replacing clinical judgment or responsibility.
 
-[![Version](https://img.shields.io/badge/version-0.1.0-17352D.svg?style=flat-square)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.1.2-17352D.svg?style=flat-square)](VERSION)
 [![skills.sh](https://skills.sh/b/Bbaozizz/tiguan-rehab-skills)](https://skills.sh/Bbaozizz/tiguan-rehab-skills)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC%204.0-B1462F.svg?style=flat-square)](LICENSE)
 
