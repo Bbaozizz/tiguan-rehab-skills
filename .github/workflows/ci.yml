@@ -33,3 +33,34 @@ jobs:
           claude plugin validate .
       - name: Build release bundle
         run: bash tools/build-skills.sh
+
+  verify-workbuddy-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify native WorkBuddy installation
+        shell: pwsh
+        run: |
+          $WorkBuddyHome = Join-Path $env:RUNNER_TEMP ".workbuddy"
+          $PrivateSkill = Join-Path $WorkBuddyHome "skills/my-private-skill/SKILL.md"
+          New-Item -ItemType Directory -Path (Split-Path $PrivateSkill) -Force | Out-Null
+          Set-Content -LiteralPath $PrivateSkill -Value "keep me" -NoNewline
+
+          & "$PWD/tools/install-workbuddy.ps1" -SourceDir "$PWD" -WorkBuddyHome $WorkBuddyHome
+
+          foreach ($Name in @("tiguan-rehab", "tiguan-assessment-session-design")) {
+            $SkillFile = Join-Path $WorkBuddyHome "skills/$Name/SKILL.md"
+            if (-not (Test-Path -LiteralPath $SkillFile -PathType Leaf)) {
+              throw "Missing installed Skill: $Name"
+            }
+          }
+          if ((Get-Content -LiteralPath $PrivateSkill -Raw) -ne "keep me") {
+            throw "Installer changed my-private-skill"
+          }
+
+          $StaleFile = Join-Path $WorkBuddyHome "skills/tiguan-rehab/stale.txt"
+          Set-Content -LiteralPath $StaleFile -Value "old"
+          & "$PWD/tools/install-workbuddy.ps1" -SourceDir "$PWD" -WorkBuddyHome $WorkBuddyHome
+          if (Test-Path -LiteralPath $StaleFile) {
+            throw "Reinstall did not replace the managed Skill"
+          }

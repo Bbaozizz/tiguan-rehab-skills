@@ -4,15 +4,15 @@
 
 > 面向认真解决客户问题的康复专业人员。让 AI 接走整理、记录、呈现和复盘工作，不替代临床判断与责任。
 
-[![Version](https://img.shields.io/badge/version-0.1.0-17352D.svg?style=flat-square)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.1.1-17352D.svg?style=flat-square)](VERSION)
 [![skills.sh](https://skills.sh/b/Bbaozizz/tiguan-rehab-skills)](https://skills.sh/Bbaozizz/tiguan-rehab-skills)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC%204.0-B1462F.svg?style=flat-square)](LICENSE)
 
-**支持：Claude Code、Codex，以及其他支持 Agent Skills 的工具。**
+**支持：WorkBuddy（macOS 本机实测，Windows 使用原生 PowerShell 安装器与 CI）、Claude Code、Codex，以及其他支持 Agent Skills 的工具。**
 
 这是由 [体观运动康复](https://tiguanrehab.cn/) 创建的公开 Skill 工具箱。首批将已在真实康复服务中重复出现的整理、呈现和复盘环节，抽成 2 个可安装、可验证的 Skills。
 
-**v0.1.0 首次公开：** 提供 `/tiguan-rehab` 统一入口与 `/tiguan-assessment-session-design` 评估课设计工作流，包含脱敏输入、合成案例、可打印报告和隐私/临床边界。
+**v0.1.1：** 新增 WorkBuddy 一键安装器。提供 `/tiguan-rehab` 统一入口与 `/tiguan-assessment-session-design` 评估课设计工作流，包含脱敏输入、合成案例、可打印报告和隐私/临床边界。
 
 [快速开始](#快速开始) · [安装](#安装) · [能力一览](#能力一览) · [完整使用手册](docs/getting-started.md) · [开源路线图](#开源路线图) · [更新日志](https://github.com/Bbaozizz/tiguan-rehab-skills/releases)
 
@@ -62,13 +62,35 @@
 
 ## 安装
 
-### 推荐：支持 Skills 的 Agent
+### WorkBuddy 一键安装
+
+WorkBuddy 当前不在通用 `skills` 安装器的 Agent 列表中，因此按系统提供专用命令。
+
+#### macOS
+
+在“终端”复制下面这一条命令：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.sh | bash
+```
+
+#### Windows
+
+在 PowerShell 复制下面这一条命令；不需要另装 Node、Git 或 WSL：
+
+```powershell
+irm https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.ps1 | iex
+```
+
+安装器只管理 `~/.workbuddy/skills/tiguan-rehab` 与 `~/.workbuddy/skills/tiguan-assessment-session-design`，不会删除或改写其他 Skill。完成后刷新或重启 WorkBuddy，在“我安装的”中确认两个 Skill 已启用，然后输入 `/tiguan-rehab 新手入门`。
+
+### 其他支持 Agent Skills 的工具
 
 ```bash
 npx -y skills add Bbaozizz/tiguan-rehab-skills -g --all
 ```
 
-安装后回到 Agent，输入 `/tiguan-rehab 新手入门` 即可开始。
+这条通用命令会安装到安装器已经支持的 Agent；它不负责 WorkBuddy。安装后回到 Agent，输入 `/tiguan-rehab 新手入门` 即可开始。
 
 ### Claude Code 插件市场
 
@@ -109,13 +131,25 @@ bash tools/build-skills.sh
 更新体观康复 Skills
 ```
 
-主入口会提示重新执行同一条远程安装命令：
+主入口会根据当前运行环境提示对应命令。WorkBuddy macOS 使用：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.sh | bash
+```
+
+WorkBuddy Windows 使用：
+
+```powershell
+irm https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.ps1 | iex
+```
+
+其他已被通用安装器支持的 Agent 使用：
 
 ```bash
 npx -y skills add Bbaozizz/tiguan-rehab-skills -g --all
 ```
 
-更新只同步该仓库的 Skills，不应改动使用者生成的报告、案例文件或其他 Skills。版本变化见 [GitHub Releases](https://github.com/Bbaozizz/tiguan-rehab-skills/releases)。
+更新只同步该仓库的两个 Skills，不应改动使用者生成的报告、案例文件或其他 Skills。WorkBuddy 的安装位置是 `~/.workbuddy/skills`。版本变化见 [GitHub Releases](https://github.com/Bbaozizz/tiguan-rehab-skills/releases)。
 
 ## 它怎样工作
 

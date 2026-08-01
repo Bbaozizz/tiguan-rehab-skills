@@ -4,7 +4,21 @@
 
 ## 1. 安装
 
-推荐从 GitHub 安装：
+WorkBuddy macOS 从 GitHub 一键安装或更新：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.sh | bash
+```
+
+WorkBuddy Windows 在 PowerShell 中运行；不需要另装 Node、Git 或 WSL：
+
+```powershell
+irm https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.ps1 | iex
+```
+
+安装器只替换它管理的两个体观 Skill，保留 `~/.workbuddy/skills` 中的其他内容。完成后刷新或重启 WorkBuddy，在“我安装的”中确认两个 Skill 已启用。
+
+其他已被通用 `skills` 安装器支持的 Agent 使用：
 
 ```bash
 npx -y skills add Bbaozizz/tiguan-rehab-skills -g --all
@@ -16,7 +30,7 @@ npx -y skills add Bbaozizz/tiguan-rehab-skills -g --all
 npx -y skills add . --all
 ```
 
-安装后重启或刷新 Agent 的 Skills 列表。如果你使用的 Agent 不支持该安装器，把 `skills/tiguan-rehab/` 和 `skills/tiguan-assessment-session-design/` 复制到该 Agent 的 Skills 目录。
+安装后重启或刷新 Agent 的 Skills 列表。如果你使用的是 WorkBuddy，不要运行带 `--agent workbuddy` 的通用安装命令；它目前不识别 WorkBuddy，请使用上面的专用一键安装器。如果是其他不受支持的 Agent，再把 `skills/tiguan-rehab/` 和 `skills/tiguan-assessment-session-design/` 复制到该 Agent 的 Skills 目录。
 
 之后只要对 Agent 说“更新体观康复 Skills”，主入口会引导重新运行远程安装命令。它不应修改你自己生成的报告或其他 Skills。
 

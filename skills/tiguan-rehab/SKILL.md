@@ -28,7 +28,19 @@ description: 体观康复公开 Skills 的统一入口和动态路由器。当�
 
 当用户说“更新体观康复 Skills”或“升级体观 Skills”时：
 
-- 说明将重新运行 `npx -y skills add Bbaozizz/tiguan-rehab-skills -g --all`；
+- 如果当前 Skill 的基础目录位于 `.workbuddy/skills`，根据当前操作系统提供 WorkBuddy 专用安装命令。macOS/Linux：
+
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.sh | bash
+  ```
+
+  Windows PowerShell：
+
+  ```powershell
+  irm https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.ps1 | iex
+  ```
+
+- 其他已被通用安装器支持的 Agent，重新运行 `npx -y skills add Bbaozizz/tiguan-rehab-skills -g --all`；
 - 更新只同步本工具箱的 Skills，不改动用户生成的报告、案例文件或其他 Skills。
 
 | 用户意图 | 路由 | 边界 |

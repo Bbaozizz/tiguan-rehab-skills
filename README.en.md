@@ -8,7 +8,7 @@
 [![skills.sh](https://skills.sh/b/Bbaozizz/tiguan-rehab-skills)](https://skills.sh/Bbaozizz/tiguan-rehab-skills)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC%204.0-B1462F.svg?style=flat-square)](LICENSE)
 
-**Supports Claude Code, Codex, and other Agent Skills-compatible tools.**
+**Supports WorkBuddy (verified locally on macOS; native PowerShell installer and CI for Windows), Claude Code, Codex, and other Agent Skills-compatible tools.**
 
 ## What is included
 
@@ -19,11 +19,27 @@ Planned post-session, progress, and studio-operations Skills are roadmap items, 
 
 ## Installation
 
-Recommended remote installation:
+WorkBuddy on macOS (install or update both Skills with one command):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.sh | bash
+```
+
+WorkBuddy on Windows (run in PowerShell; Node, Git, and WSL are not required):
+
+```powershell
+irm https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.ps1 | iex
+```
+
+This installer only manages the two Tguan directories under `~/.workbuddy/skills`. Refresh or restart WorkBuddy after installation.
+
+For agents supported by the generic `skills` installer:
 
 ```bash
 npx -y skills add Bbaozizz/tiguan-rehab-skills -g --all
 ```
+
+The generic installer does not currently recognize WorkBuddy; use the dedicated command above for WorkBuddy.
 
 For a local clone, run from the repository root:
 

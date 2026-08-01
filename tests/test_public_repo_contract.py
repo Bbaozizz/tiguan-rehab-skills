@@ -33,6 +33,8 @@ class PublicRepoContractTest(unittest.TestCase):
             "tools/build-skills.sh",
             "tools/check-publication-readiness.py",
             "tools/quick_validate_skill.py",
+            "tools/install-workbuddy.sh",
+            "tools/install-workbuddy.ps1",
         ]
         for relative_path in required:
             self.assertTrue((ROOT / relative_path).is_file(), relative_path)
@@ -64,6 +66,19 @@ class PublicRepoContractTest(unittest.TestCase):
         self.assertIn("### 更新", readme)
         self.assertIn("更新体观康复 Skills", readme)
         self.assertIn("https://github.com/Bbaozizz/tiguan-rehab-skills/releases", readme)
+        self.assertIn("### WorkBuddy 一键安装", readme)
+        self.assertIn(
+            "raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/"
+            "tools/install-workbuddy.sh",
+            readme,
+        )
+        self.assertIn("~/.workbuddy/skills", readme)
+        self.assertIn("#### Windows", readme)
+        self.assertIn(
+            "raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/"
+            "tools/install-workbuddy.ps1",
+            readme,
+        )
         self.assertNotIn("GitHub Pages", readme)
 
     def test_license_is_noncommercial_and_attribution_required(self) -> None:
