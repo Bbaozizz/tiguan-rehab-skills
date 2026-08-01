@@ -1,23 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
-  <title id="title">体观康复 Skills 链接图</title>
-  <desc id="desc">从 GitHub 仓库首页和 README，通过安装与主入口，路由到评估课设计 Skill，最后交给康复师审核、执行与复测。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1040" role="img" aria-labelledby="title desc">
+  <title id="title">体观康复 Skills 完整能力地图与当前开放状态</title>
+  <desc id="desc">康复学生、机构康复师、个人门店康复师与机构负责人，通过统一入口进入实践认知校准、可验证服务设计、专业价值可见化和执业系统诊断四个长期能力簇。当前已发布统一入口和评估课设计，其他能力仍在规划中。</desc>
   <defs>
     <style>
-      .bg{fill:#f3efe4}.ink{fill:#17352d}.paper{fill:#fffdf6;stroke:#17352d;stroke-width:3}.plan{fill:#ece6d8;stroke:#8d8a80;stroke-width:2;stroke-dasharray:10 8}.accent{fill:#b1462f}.label{font:700 22px 'Noto Sans SC','PingFang SC',sans-serif;fill:#17352d}.small{font:500 15px 'Noto Sans SC','PingFang SC',sans-serif;fill:#68736d}.white{fill:#fffdf6}.line{stroke:#17352d;stroke-width:4;fill:none;marker-end:url(#arrow)}
+      .bg{fill:#f3efe4}.ink{fill:#17352d}.paper{fill:#fffdf6;stroke:#17352d;stroke-width:3}.planned{fill:#ece6d8;stroke:#8d8a80;stroke-width:2.5;stroke-dasharray:10 8}.released{fill:#fffdf6;stroke:#17352d;stroke-width:4}.accent{fill:#b1462f}.title{font:700 34px 'Noto Serif SC','Songti SC',serif;fill:#fffdf6}.section{font:700 24px 'Noto Sans SC','PingFang SC',sans-serif;fill:#17352d}.label{font:700 21px 'Noto Sans SC','PingFang SC',sans-serif;fill:#17352d}.small{font:500 15px 'Noto Sans SC','PingFang SC',sans-serif;fill:#68736d}.tiny{font:500 13px 'Noto Sans SC','PingFang SC',sans-serif;fill:#68736d}.white{fill:#fffdf6}.line{stroke:#17352d;stroke-width:4;fill:none;marker-end:url(#arrow)}.softline{stroke:#8d8a80;stroke-width:2.5;fill:none;stroke-dasharray:8 7}.pill{fill:#fffdf6;stroke:#c8c1b2;stroke-width:2}
     </style>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0L12 6L0 12Z" class="ink"/></marker>
   </defs>
-  <rect width="1200" height="900" class="bg"/>
-  <rect x="70" y="58" width="1060" height="84" class="ink"/>
-  <text x="105" y="110" font-family="Noto Serif SC,Songti SC,serif" font-size="34" font-weight="700" class="white">体观康复 Skills · 理解→安装→路由→执行→复测</text>
-  <rect x="90" y="210" width="220" height="126" class="paper"/><text x="122" y="255" class="label">介绍与信任</text><text x="122" y="286" class="small">GitHub 仓库首页</text><text x="122" y="312" class="small">README / 使用手册</text>
-  <path d="M310 273H410" class="line"/>
-  <rect x="430" y="210" width="220" height="126" class="paper"/><text x="464" y="255" class="label">安装与调用</text><text x="464" y="286" class="small">npx skills add</text><text x="464" y="312" class="small">Claude plugin / Release</text>
-  <path d="M650 273H750" class="line"/>
-  <rect x="770" y="210" width="340" height="126" class="paper"/><text x="810" y="255" class="label">/tiguan-rehab</text><text x="810" y="286" class="small">读取上下文·只路由已发布能力</text><text x="810" y="312" class="small">计划中 ≠ 已可下载</text>
-  <path d="M940 336V426" class="line"/>
-  <rect x="300" y="450" width="600" height="170" class="paper"/><rect x="300" y="450" width="14" height="170" class="accent"/><text x="348" y="500" class="label">/tiguan-assessment-session-design</text><text x="348" y="540" class="small">脱敏事实卡 · 客户可理解基线 · 相同条件复测</text><text x="348" y="570" class="small">一个生活行动 · 客户提醒草稿 · 可打印报告</text><text x="348" y="600" class="small">AI 整理与呈现，不决定临床内容</text>
-  <path d="M600 620V710" class="line"/>
-  <rect x="300" y="735" width="600" height="92" class="ink"/><text x="345" y="775" class="label white">康复师审核、真实执行、带回复测</text><text x="345" y="804" class="small white">文件成功 ≠ 临床成功 ≠ 业务闭环</text>
-  <rect x="940" y="450" width="170" height="170" class="plan"/><text x="973" y="493" class="label">路线图</text><text x="973" y="530" class="small">课后质询</text><text x="973" y="558" class="small">课后交付</text><text x="973" y="586" class="small">进度 / 经营</text>
+
+  <rect width="1400" height="1040" class="bg"/>
+  <rect x="70" y="48" width="1260" height="88" class="ink"/>
+  <text x="110" y="104" class="title">体观康复 Skills · 从真实问题到认知转变</text>
+
+  <text x="90" y="184" class="section">第一轮使用者</text>
+  <rect x="90" y="208" width="275" height="64" rx="6" class="pill"/><text x="176" y="248" class="label">康复学生</text>
+  <rect x="405" y="208" width="275" height="64" rx="6" class="pill"/><text x="460" y="248" class="label">医院 / 机构康复师</text>
+  <rect x="720" y="208" width="275" height="64" rx="6" class="pill"/><text x="776" y="248" class="label">个人门店康复师</text>
+  <rect x="1035" y="208" width="275" height="64" rx="6" class="pill"/><text x="1118" y="248" class="label">机构负责人</text>
+
+  <path d="M700 286V340" class="line"/>
+  <rect x="350" y="344" width="700" height="102" rx="6" class="released"/>
+  <rect x="350" y="344" width="16" height="102" class="accent"/>
+  <text x="405" y="386" class="section">/tiguan-rehab 统一入口</text>
+  <text x="405" y="418" class="small">读取当前角色、真实任务与材料 · 只路由已发布能力</text>
+
+  <path d="M700 446V500" class="line"/>
+  <text x="90" y="520" class="section">四个长期能力簇</text>
+
+  <rect x="90" y="548" width="575" height="150" rx="6" class="planned"/>
+  <text x="130" y="590" class="label">实践认知校准</text>
+  <text x="130" y="624" class="small">自我认知 × 脱敏实践证据 → 知行错配</text>
+  <text x="130" y="656" class="small">学习 · 入职 · 单次实践 · 角色转型</text>
+  <text x="544" y="588" class="tiny">规划中</text>
+
+  <rect x="735" y="548" width="575" height="210" rx="6" class="released"/>
+  <rect x="735" y="548" width="16" height="210" class="accent"/>
+  <text x="790" y="590" class="label">可验证服务设计</text>
+  <text x="790" y="624" class="small">目标 → 基线 → 假设 → 复测 → 阶段决策</text>
+  <text x="790" y="657" class="tiny">已发布</text>
+  <text x="790" y="688" class="label">/tiguan-assessment-session-design</text>
+  <text x="790" y="720" class="tiny">评估课之后的方案、课后、复评、结束与转诊仍在规划中</text>
+
+  <rect x="90" y="730" width="575" height="150" rx="6" class="planned"/>
+  <text x="130" y="772" class="label">专业价值可见化</text>
+  <text x="130" y="806" class="small">让真实判断和证据被特定对象理解</text>
+  <text x="130" y="838" class="small">客户沟通 · 团队协作 · 案例表达 · 内容获客</text>
+  <text x="544" y="770" class="tiny">规划中</text>
+
+  <rect x="735" y="790" width="575" height="150" rx="6" class="planned"/>
+  <text x="775" y="832" class="label">执业系统诊断</text>
+  <text x="775" y="866" class="small">找出专业、交付、表达、协作与经营的真断点</text>
+  <text x="775" y="898" class="small">个人执业 · 单人门店 · 机构协作 · 质量管理</text>
+  <text x="1189" y="830" class="tiny">规划中</text>
+
+  <rect x="90" y="958" width="1220" height="58" rx="4" class="ink"/>
+  <text x="130" y="994" class="label white">一个 Skill 完成一次关键认知转变 → 使用者审核 → 真实执行 → 带回新证据</text>
 </svg>

@@ -79,7 +79,31 @@ class PublicRepoContractTest(unittest.TestCase):
             "tools/install-workbuddy.ps1",
             readme,
         )
+        for capability in [
+            "实践认知校准",
+            "可验证服务设计",
+            "专业价值可见化",
+            "执业系统诊断",
+        ]:
+            self.assertIn(capability, readme)
+        self.assertIn("规划中的能力不等于已经可安装", readme)
         self.assertNotIn("GitHub Pages", readme)
+
+    def test_public_guide_and_map_share_the_capability_framework(self) -> None:
+        guide = (ROOT / "docs/getting-started.md").read_text(encoding="utf-8")
+        skill_map = (ROOT / "docs/skill-map.svg").read_text(encoding="utf-8")
+        for capability in [
+            "实践认知校准",
+            "可验证服务设计",
+            "专业价值可见化",
+            "执业系统诊断",
+        ]:
+            self.assertIn(capability, guide)
+            self.assertIn(capability, skill_map)
+        self.assertIn("当前安装包包含 2 个已发布 Skill", guide)
+        self.assertIn("只路由已发布能力", skill_map)
+        self.assertNotIn("课后交付</text>", skill_map)
+        self.assertNotIn("进度 / 经营</text>", skill_map)
 
     def test_license_is_noncommercial_and_attribution_required(self) -> None:
         license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
