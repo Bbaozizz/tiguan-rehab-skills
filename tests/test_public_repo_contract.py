@@ -106,6 +106,14 @@ class PublicRepoContractTest(unittest.TestCase):
         self.assertIn("plugin.json", ci)
         self.assertIn("dist/skills/*.zip", release)
 
+    def test_public_surfaces_explain_zero_infrastructure_first_success(self) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        guide = (ROOT / "docs/getting-started.md").read_text(encoding="utf-8")
+        for text in [readme, guide]:
+            self.assertIn("不需要先有知识库、客户档案、标准经营表或系统接口", text)
+            self.assertIn("先让你讲出自己的理解", text)
+            self.assertIn("7 天最小采集表", text)
+
     def test_public_guide_and_map_share_the_capability_framework(self) -> None:
         guide = (ROOT / "docs/getting-started.md").read_text(encoding="utf-8")
         skill_map = (ROOT / "docs/skill-map.svg").read_text(encoding="utf-8")

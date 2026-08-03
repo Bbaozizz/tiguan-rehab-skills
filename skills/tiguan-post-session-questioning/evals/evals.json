@@ -1,1 +1,12 @@
-[{"kind":"positive","prompt":"质询这一堂合成课。","assertions":["一个追问","知行对照"]},{"kind":"near_miss","prompt":"记录没有动作，所以没做。","assertions":["现场待追问"]}]
+[
+  {
+    "kind": "positive",
+    "prompt": "我没有档案，下面是对一堂合成课的事后复述。请按事后新陈述开始质询，一次只问一个问题。",
+    "assertions": ["事后新陈述", "一个追问", "知行对照"]
+  },
+  {
+    "kind": "near_miss",
+    "prompt": "记录没有动作，所以没做。",
+    "assertions": ["现场待追问"]
+  }
+]

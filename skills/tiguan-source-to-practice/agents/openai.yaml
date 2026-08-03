@@ -1,4 +1,4 @@
 interface:
-  display_name: "资料变成实践"
-  short_description: "Turn source material into a small verifiable practice action"
-  default_prompt: "Use $tiguan-source-to-practice to turn this material into one small action I can verify."
+  display_name: "主动学习｜资料变成实践"
+  short_description: "Ask me first, then compare my understanding with the source"
+  default_prompt: "Use $tiguan-source-to-practice to ask for my explanation before teaching, compare it with the source, and help me correct one important gap."

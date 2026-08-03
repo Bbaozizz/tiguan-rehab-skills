@@ -1,4 +1,4 @@
 interface:
-  display_name: "客户服务运营"
-  short_description: "Safely preview and run service operations"
-  default_prompt: "Use $tiguan-service-ops to preview this service operation before any write."
+  display_name: "单次服务快速收口"
+  short_description: "Turn one session account into drafts before any system write"
+  default_prompt: "Use $tiguan-service-ops to turn this de-identified session account into a professional record draft, client take-home explanation, and next-session focus without assuming I have a client system."

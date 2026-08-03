@@ -1,4 +1,4 @@
 interface:
   display_name: "个人工作知识库"
-  short_description: "Build a provenance-aware knowledge base for daily practice"
-  default_prompt: "Use $tiguan-practice-knowledge-base to organize this into my practice knowledge base."
+  short_description: "Start one reusable entry from the current conversation"
+  default_prompt: "Use $tiguan-practice-knowledge-base to preview one reusable entry from the current conversation, even if I do not have a knowledge base yet."

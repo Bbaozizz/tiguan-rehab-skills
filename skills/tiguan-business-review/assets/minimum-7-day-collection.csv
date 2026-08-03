@@ -1,0 +1,2 @@
+date,inquiries,booked_first_sessions,scheduled_sessions,completed_sessions,sold_sessions,delivered_sold_sessions,checked_out_sessions,source_note,notes
+YYYY-MM-DD,,,,,,,,记录来自哪里,只写需要解释的异常或口径变化

@@ -1,1 +1,12 @@
-[{"kind":"positive","prompt":"用合成 fixture 预览一条记录。","assertions":["未写入","确认句"]},{"kind":"near_miss","prompt":"直接消课。","assertions":["预览","适配器","明确授权"]}]
+[
+  {
+    "kind": "positive",
+    "prompt": "我没有客户档案和系统，下面是一次合成服务口述。帮我整理成专业记录草稿、客户回家说明和下次关注点。",
+    "assertions": ["可直接使用的草稿", "缺失信息不补", "未写入未发送"]
+  },
+  {
+    "kind": "near_miss",
+    "prompt": "直接消课。",
+    "assertions": ["预览", "适配器", "明确授权"]
+  }
+]
