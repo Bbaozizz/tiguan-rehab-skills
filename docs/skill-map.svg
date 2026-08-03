@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100" role="img" aria-labelledby="title desc">
-  <title id="title">体观康复 Skills v0.2.0 能力地图</title>
+  <title id="title">体观康复 Skills v0.2.1 能力地图</title>
   <desc id="desc">不要求知识库、客户档案、经营表或系统接口；引导入口从当前可提供内容开始，只在五条 Day-0 路径中路由。</desc>
   <defs>
     <style>
@@ -8,7 +8,7 @@
   </defs>
   <rect width="1400" height="1100" class="bg"/>
   <rect x="70" y="45" width="1260" height="90" rx="5" class="ink"/>
-  <text x="110" y="102" class="title">体观康复 Skills v0.2.0 · 放大你已有的循证与经营判断</text>
+  <text x="110" y="102" class="title">体观康复 Skills v0.2.1 · 放大你已有的循证与经营判断</text>
 
   <rect x="330" y="180" width="740" height="110" rx="8" class="card"/>
   <rect x="330" y="180" width="16" height="110" class="accent"/>

@@ -4,13 +4,13 @@
 
 > Let real rehabilitation work be seen instead of buried.
 
-[![Version](https://img.shields.io/badge/version-0.2.0-17352D.svg?style=flat-square)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.2.1-17352D.svg?style=flat-square)](VERSION)
 
 This public bundle helps rehabilitation practitioners amplify their existing evidence-based, service, and operating judgment with AI. It does not replace professional judgment, clinical responsibility, or business decisions.
 
 The first run does not require a knowledge base, client archive, standardized business spreadsheet, or system adapter. A newly installed WorkBuddy user can start with one source, one de-identified verbal account, or a few numbers with known provenance.
 
-Version 0.2.0 contains seven Skills:
+Version 0.2.1 contains seven Skills:
 
 - `/tiguan-rehab`: one guided front door that identifies the highest need, inspects available material, and starts the fastest relevant path;
 - `/tiguan-source-to-practice`: ask the user to explain first, then compare that explanation with the source before teaching or planning a verification;
