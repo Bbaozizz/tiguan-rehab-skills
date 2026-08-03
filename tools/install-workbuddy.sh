@@ -5,15 +5,6 @@ REPOSITORY="${TIGUAN_SKILLS_REPOSITORY:-Bbaozizz/tiguan-rehab-skills}"
 REF="${TIGUAN_SKILLS_REF:-main}"
 SOURCE_DIR="${TIGUAN_SKILLS_SOURCE_DIR:-}"
 WORKBUDDY_HOME="${WORKBUDDY_HOME:-${HOME}/.workbuddy}"
-SKILL_NAMES=(
-  "tiguan-rehab"
-  "tiguan-assessment-session-design"
-  "tiguan-source-to-practice"
-  "tiguan-practice-knowledge-base"
-  "tiguan-service-ops"
-  "tiguan-post-session-questioning"
-  "tiguan-business-review"
-)
 
 usage() {
   cat <<'EOF'
@@ -114,6 +105,31 @@ else
     exit 1
   fi
   REPO_ROOT="${EXTRACTED_ENTRIES[0]}"
+fi
+
+SKILL_NAMES=()
+while IFS= read -r skill_name; do
+  [[ -n "$skill_name" ]] && SKILL_NAMES+=("$skill_name")
+done < <(
+  python3 - "$REPO_ROOT/.claude-plugin/plugin.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+manifest = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+skills = manifest.get("skills")
+if not isinstance(skills, list):
+    raise SystemExit("Invalid package: .claude-plugin/plugin.json has no skills list")
+for item in skills:
+    if not isinstance(item, str) or not item.startswith("./skills/"):
+        raise SystemExit("Invalid package: malformed published Skill path")
+    print(item.removeprefix("./skills/"))
+PY
+)
+
+if [[ ${#SKILL_NAMES[@]} -eq 0 ]]; then
+  echo "Invalid package: .claude-plugin/plugin.json declares no skills" >&2
+  exit 1
 fi
 
 for name in "${SKILL_NAMES[@]}"; do

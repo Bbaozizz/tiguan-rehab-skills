@@ -9,15 +9,6 @@ param(
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
-$SkillNames = @(
-    "tiguan-rehab",
-    "tiguan-assessment-session-design",
-    "tiguan-source-to-practice",
-    "tiguan-practice-knowledge-base",
-    "tiguan-service-ops",
-    "tiguan-post-session-questioning",
-    "tiguan-business-review"
-)
 $TempSource = $null
 $StageDir = $null
 
@@ -56,6 +47,21 @@ try {
             throw "Downloaded archive has an unexpected layout."
         }
         $RepoRoot = $ExtractedRoots[0].FullName
+    }
+
+    $ManifestPath = Join-Path $RepoRoot ".claude-plugin/plugin.json"
+    if (-not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) {
+        throw "Invalid package: missing .claude-plugin/plugin.json"
+    }
+    $Manifest = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
+    $SkillNames = @($Manifest.skills | ForEach-Object {
+        if ($_ -isnot [string] -or -not $_.StartsWith("./skills/")) {
+            throw "Invalid package: malformed published Skill path"
+        }
+        $_.Substring("./skills/".Length)
+    })
+    if ($SkillNames.Count -eq 0) {
+        throw "Invalid package: .claude-plugin/plugin.json declares no skills"
     }
 
     foreach ($Name in $SkillNames) {

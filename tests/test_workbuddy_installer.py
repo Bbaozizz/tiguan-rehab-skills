@@ -8,18 +8,13 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import sys
+
 
 ROOT = Path(__file__).resolve().parents[1]
 INSTALLER = ROOT / "tools/install-workbuddy.sh"
-SKILL_NAMES = (
-    "tiguan-rehab",
-    "tiguan-assessment-session-design",
-    "tiguan-source-to-practice",
-    "tiguan-practice-knowledge-base",
-    "tiguan-service-ops",
-    "tiguan-post-session-questioning",
-    "tiguan-business-review",
-)
+sys.path.insert(0, str(ROOT / "tools"))
+from skill_registry import load_registry  # noqa: E402
 
 
 class WorkBuddyInstallerTest(unittest.TestCase):
@@ -45,7 +40,7 @@ class WorkBuddyInstallerTest(unittest.TestCase):
             result = self.run_installer(workbuddy_home)
 
             self.assertEqual(result.returncode, 0, result.stderr)
-            for name in SKILL_NAMES:
+            for name in load_registry(ROOT).published_skill_ids:
                 installed = workbuddy_home / "skills" / name / "SKILL.md"
                 self.assertTrue(installed.is_file(), name)
                 self.assertEqual(
@@ -69,6 +64,10 @@ class WorkBuddyInstallerTest(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(unrelated.read_text(encoding="utf-8"), "keep me")
             self.assertFalse(stale.exists())
+
+    def test_installer_reads_the_source_manifest_instead_of_a_shell_list(self) -> None:
+        script = INSTALLER.read_text(encoding="utf-8")
+        self.assertIn(".claude-plugin/plugin.json", script)
 
     def test_invalid_source_does_not_replace_existing_installation(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

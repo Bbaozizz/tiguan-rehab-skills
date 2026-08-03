@@ -16,13 +16,8 @@ class WorkBuddyWindowsContractTest(unittest.TestCase):
     def test_powershell_installer_manages_only_the_public_skills(self) -> None:
         script = INSTALLER.read_text(encoding="utf-8")
 
-        self.assertIn('"tiguan-rehab"', script)
-        self.assertIn('"tiguan-assessment-session-design"', script)
-        self.assertIn('"tiguan-source-to-practice"', script)
-        self.assertIn('"tiguan-practice-knowledge-base"', script)
-        self.assertIn('"tiguan-service-ops"', script)
-        self.assertIn('"tiguan-post-session-questioning"', script)
-        self.assertIn('"tiguan-business-review"', script)
+        self.assertIn(".claude-plugin/plugin.json", script)
+        self.assertNotIn("$SkillNames = @(\n    \"tiguan-rehab\"", script)
         self.assertIn(".workbuddy", script)
         self.assertIn("SKILL.md", script)
         self.assertNotIn("Remove-Item $WorkBuddyHome", script)
