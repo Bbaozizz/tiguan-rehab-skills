@@ -1,0 +1,4 @@
+interface:
+  display_name: "课后质询"
+  short_description: "Use evidence-led questioning to uncover knowledge-action gaps"
+  default_prompt: "Use $tiguan-post-session-questioning to question this completed session one issue at a time."

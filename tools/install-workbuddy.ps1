@@ -9,10 +9,6 @@ param(
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
-$SkillNames = @(
-    "tiguan-rehab",
-    "tiguan-assessment-session-design"
-)
 $TempSource = $null
 $StageDir = $null
 
@@ -21,6 +17,22 @@ function Remove-InstallerPath {
 
     if ($Path -and (Test-Path -LiteralPath $Path)) {
         Remove-Item -LiteralPath $Path -Recurse -Force
+    }
+}
+
+function Assert-TargetWithinSkillsRoot {
+    param([string]$Root, [string]$Target)
+
+    $ResolvedRoot = (Resolve-Path -LiteralPath $Root).Path.TrimEnd('\', '/')
+    if (Test-Path -LiteralPath $Target) {
+        $ResolvedTarget = (Resolve-Path -LiteralPath $Target).Path
+    }
+    else {
+        $ResolvedTarget = [System.IO.Path]::GetFullPath($Target)
+    }
+    $Prefix = $ResolvedRoot + [System.IO.Path]::DirectorySeparatorChar
+    if (-not $ResolvedTarget.StartsWith($Prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing target outside Skills root: $ResolvedTarget"
     }
 }
 
@@ -53,6 +65,34 @@ try {
         $RepoRoot = $ExtractedRoots[0].FullName
     }
 
+    $ManifestPath = Join-Path $RepoRoot ".claude-plugin/plugin.json"
+    if (-not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) {
+        throw "Invalid package: missing .claude-plugin/plugin.json"
+    }
+    $Manifest = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
+    $SkillNames = @($Manifest.skills)
+    if ($SkillNames.Count -eq 0) {
+        throw "Invalid package: .claude-plugin/plugin.json declares no skills"
+    }
+    foreach ($Name in $SkillNames) {
+        if ($Name -isnot [string] -or $Name -notmatch '^\./skills/[a-z0-9]+(?:-[a-z0-9]+)*$') {
+            throw "Invalid package: malformed published Skill path"
+        }
+    }
+    $SkillNames = @($SkillNames | ForEach-Object { $_.Substring("./skills/".Length) })
+    if (@($SkillNames | Select-Object -Unique).Count -ne $SkillNames.Count) {
+        throw "Invalid package: duplicate published Skill ID"
+    }
+    $PrimaryRoutes = @($Manifest.primaryRoutes)
+    if ($PrimaryRoutes.Count -ne 5 -or @($PrimaryRoutes | Select-Object -Unique).Count -ne 5) {
+        throw "Invalid package: primaryRoutes must contain exactly five unique IDs"
+    }
+    foreach ($Route in $PrimaryRoutes) {
+        if ($Route -notin $SkillNames) {
+            throw "Invalid package: undeclared primaryRoutes ID: $Route"
+        }
+    }
+
     foreach ($Name in $SkillNames) {
         $SkillFile = Join-Path $RepoRoot "skills/$Name/SKILL.md"
         if (-not (Test-Path -LiteralPath $SkillFile -PathType Leaf)) {
@@ -62,6 +102,7 @@ try {
 
     $TargetRoot = Join-Path $WorkBuddyHome "skills"
     New-Item -ItemType Directory -Path $TargetRoot -Force | Out-Null
+    $TargetRoot = (Resolve-Path -LiteralPath $TargetRoot).Path
     $StageDir = Join-Path $TargetRoot (
         ".tiguan-install." + [System.Guid]::NewGuid().ToString("N")
     )
@@ -71,6 +112,7 @@ try {
     New-Item -ItemType Directory -Path $BackupRoot -Force | Out-Null
 
     foreach ($Name in $SkillNames) {
+        Assert-TargetWithinSkillsRoot -Root $TargetRoot -Target (Join-Path $TargetRoot $Name)
         Copy-Item `
             -LiteralPath (Join-Path $RepoRoot "skills/$Name") `
             -Destination (Join-Path $NewRoot $Name) `
@@ -82,6 +124,7 @@ try {
     try {
         foreach ($Name in $SkillNames) {
             $Target = Join-Path $TargetRoot $Name
+            Assert-TargetWithinSkillsRoot -Root $TargetRoot -Target $Target
             $Backup = Join-Path $BackupRoot $Name
             if (Test-Path -LiteralPath $Target) {
                 Move-Item -LiteralPath $Target -Destination $Backup

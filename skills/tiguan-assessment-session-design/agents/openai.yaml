@@ -1,4 +1,4 @@
 interface:
-  display_name: "评估课设计"
-  short_description: "Design a verifiable assessment session from safe context"
-  default_prompt: "Use $tiguan-assessment-session-design to design an assessment session from de-identified client context."
+  display_name: "评估问卷与课前准备"
+  short_description: "Adapt your questionnaire and prepare from de-identified answers"
+  default_prompt: "Use $tiguan-assessment-session-design to adapt my questionnaire or turn de-identified answers into pre-session preparation."

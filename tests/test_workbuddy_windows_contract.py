@@ -13,11 +13,16 @@ CI_WORKFLOW = ROOT / ".github/workflows/ci.yml"
 
 
 class WorkBuddyWindowsContractTest(unittest.TestCase):
-    def test_powershell_installer_manages_only_the_two_public_skills(self) -> None:
+    def test_powershell_installer_manages_only_the_public_skills(self) -> None:
         script = INSTALLER.read_text(encoding="utf-8")
 
-        self.assertIn('"tiguan-rehab"', script)
-        self.assertIn('"tiguan-assessment-session-design"', script)
+        self.assertIn("ConvertFrom-Json", script)
+        self.assertNotIn("& python", script)
+        self.assertIn("Resolve-Path", script)
+        self.assertIn("duplicate", script.lower())
+        self.assertIn("primaryRoutes", script)
+        self.assertLess(script.index("Installation verification failed"), script.index("catch {"))
+        self.assertNotIn("$SkillNames = @(\n    \"tiguan-rehab\"", script)
         self.assertIn(".workbuddy", script)
         self.assertIn("SKILL.md", script)
         self.assertNotIn("Remove-Item $WorkBuddyHome", script)
@@ -28,7 +33,7 @@ class WorkBuddyWindowsContractTest(unittest.TestCase):
 
         self.assertIn("windows-latest", workflow)
         self.assertIn("tools/install-workbuddy.ps1", workflow)
-        self.assertIn("tiguan-assessment-session-design", workflow)
+        self.assertIn(".claude-plugin/plugin.json", workflow)
         self.assertIn("my-private-skill", workflow)
 
 

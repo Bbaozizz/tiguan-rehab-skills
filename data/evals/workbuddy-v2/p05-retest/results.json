@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "evaluation": "P05 isolated three-run retest",
+  "model_requested": "hy3",
+  "prompt_kind": "synthetic post-session questioning fixture",
+  "recovery": "transactional restore verified by before/after type, SHA-256, and symlink-target manifests",
+  "primary_run_conclusion_unchanged": "The original ten-case run remains FAIL because P05 timed out.",
+  "summary": {
+    "runs": 3,
+    "timeouts": 1,
+    "successful_visible_responses": 2,
+    "isolated_router_confirmed_in_successful_runs": 2
+  },
+  "runs": [
+    {
+      "id": "R01",
+      "exit_code": 124,
+      "timeout": true,
+      "elapsed_ms": 60036,
+      "duration_ms": null,
+      "result": null,
+      "model_actual": null,
+      "isolated_router_detected": false
+    },
+    {
+      "id": "R02",
+      "exit_code": 0,
+      "timeout": false,
+      "elapsed_ms": 31084,
+      "duration_ms": 25574,
+      "result": "success",
+      "model_actual": "hy3",
+      "isolated_router_detected": true
+    },
+    {
+      "id": "R03",
+      "exit_code": 0,
+      "timeout": false,
+      "elapsed_ms": 45470,
+      "duration_ms": 42492,
+      "result": "success",
+      "model_actual": "hy3",
+      "isolated_router_detected": true
+    }
+  ]
+}

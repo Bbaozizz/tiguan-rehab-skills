@@ -1,0 +1,20 @@
+{
+  "period": "2026-07",
+  "source_note": "de-identified monthly operating export",
+  "metric_definitions": {
+    "inquiries": "unique inquiries in the period",
+    "booked_first_sessions": "first sessions booked in the period",
+    "scheduled_sessions": "sessions scheduled in the period",
+    "completed_sessions": "sessions completed in the period",
+    "sold_sessions": "sessions sold and available for delivery",
+    "delivered_sold_sessions": "sold sessions delivered",
+    "checked_out_sessions": "completed sessions checked out"
+  },
+  "inquiries": 40,
+  "booked_first_sessions": 12,
+  "scheduled_sessions": 50,
+  "completed_sessions": 44,
+  "sold_sessions": 80,
+  "delivered_sold_sessions": 38,
+  "checked_out_sessions": 43
+}

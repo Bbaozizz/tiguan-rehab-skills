@@ -8,12 +8,10 @@ import re
 import sys
 from pathlib import Path
 
+from skill_registry import RegistryError, load_registry
+
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_SKILLS = {
-    "tiguan-rehab",
-    "tiguan-assessment-session-design",
-}
 FORBIDDEN = (
     "/Users/apple/",
     "tiguan-studio-db",
@@ -37,24 +35,24 @@ def main() -> None:
     if re.fullmatch(r"\d+\.\d+\.\d+", version) is None:
         errors.append(f"VERSION 不是语义化版本：{version!r}")
 
-    plugin = json.loads(
-        (ROOT / ".claude-plugin/plugin.json").read_text(encoding="utf-8")
-    )
+    try:
+        registry = load_registry(ROOT)
+    except RegistryError as error:
+        errors.append(str(error))
+        registry = None
     marketplace = json.loads(
         (ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8")
     )
-    plugin_names = {Path(item).name for item in plugin.get("skills", [])}
-    if plugin_names != EXPECTED_SKILLS:
-        errors.append(f"plugin.json Skills 不一致：{sorted(plugin_names)}")
+    expected_skills = registry.published_skill_ids if registry else frozenset()
     market_items = marketplace.get("plugins", [])
     if marketplace.get("metadata", {}).get("version") != version:
         errors.append("marketplace metadata.version 与 VERSION 不一致")
-    if {item.get("name") for item in market_items} != EXPECTED_SKILLS:
+    if {item.get("name") for item in market_items} != expected_skills:
         errors.append("marketplace 插件集与已发布 Skills 不一致")
     if any(item.get("version") != version for item in market_items):
         errors.append("marketplace 存在与 VERSION 不一致的插件")
 
-    for name in sorted(EXPECTED_SKILLS):
+    for name in sorted(expected_skills):
         skill_dir = ROOT / "skills" / name
         skill_md = skill_dir / "SKILL.md"
         agent_yaml = skill_dir / "agents/openai.yaml"
@@ -98,7 +96,7 @@ def main() -> None:
         fail(errors)
     print(
         f"公开发布门禁通过：v{version}，"
-        f"{len(EXPECTED_SKILLS)} 个已实现 Skill，未发现私有运行时路径。"
+        f"{len(expected_skills)} 个已实现 Skill，未发现私有运行时路径。"
     )
 
 

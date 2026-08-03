@@ -9,6 +9,7 @@ from pathlib import Path
 
 
 NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+FORBIDDEN_DISCOVERY = ("扫描当前工作目录", "扫描工作区")
 
 
 def parse_frontmatter(text: str) -> dict[str, str]:
@@ -38,7 +39,8 @@ def validate(skill_dir: Path) -> None:
     if not skill_md.is_file():
         raise ValueError(f"missing {skill_md}")
 
-    fields = parse_frontmatter(skill_md.read_text(encoding="utf-8"))
+    skill_text = skill_md.read_text(encoding="utf-8")
+    fields = parse_frontmatter(skill_text)
     if set(fields) != {"name", "description"}:
         raise ValueError("frontmatter must contain only name and description")
     name = fields["name"]
@@ -50,6 +52,8 @@ def validate(skill_dir: Path) -> None:
         raise ValueError("description must not be empty")
     if not (skill_dir / "agents/openai.yaml").is_file():
         raise ValueError("missing agents/openai.yaml")
+    if any(marker in skill_text for marker in FORBIDDEN_DISCOVERY):
+        raise ValueError("public Skill must not request broad workspace discovery")
 
 
 def main() -> int:

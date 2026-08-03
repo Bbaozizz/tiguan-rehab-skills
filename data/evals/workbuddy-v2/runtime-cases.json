@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "purpose": "Synthetic, de-identified runtime prompts for the WorkBuddy router v2 evaluation.",
+  "cases": [
+    {
+      "id": "P01",
+      "expected_route": "tiguan-source-to-practice",
+      "runtime_prompt": "/tiguan-rehab 我有一段指南摘要，想用于下周的专业复盘。唯一可用材料是公开、合成的内联摘要：Synthetic Guideline Brief v1；来源事实：在本合成摘要中，复测被列为确认环节；未提供任何个体资料。请从这一份内联材料开始，不扫描目录或其他路径。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    },
+    {
+      "id": "P02",
+      "expected_route": "tiguan-source-to-practice",
+      "runtime_prompt": "/tiguan-rehab 这是完全合成、非个体化的课程摘要；我想知道它如何影响我的判断。唯一内联摘要：课程强调先确认理解，再验证迁移。请指出来源事实，并提出一个非个体化学习验证问题；不要给动作剂量、排课或临床建议。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    },
+    {
+      "id": "P03",
+      "expected_route": "tiguan-service-ops",
+      "runtime_prompt": "/tiguan-rehab 用这个明确提供的合成 fixture 帮我检查预约预览。只可使用下列内联 fixture，禁止读取其他客户资料或路径：{appointment_id:'SYN-APPT-01', client_alias:'A', status:'pending', time:'2026-08-10 10:00'}。请给未写入的预约预览。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    },
+    {
+      "id": "P04",
+      "expected_route": "tiguan-practice-knowledge-base",
+      "runtime_prompt": "/tiguan-rehab 我想让现有的知识笔记下次能找到。唯一材料是我上传的内联脱敏笔记：标题=肩部复测提醒；内容=下次复核原始任务与延迟反应；来源=自有笔记。请从它开始给一个来源指针和状态字段，不新建平行知识库，也不扫描目录。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    },
+    {
+      "id": "P05",
+      "expected_route": "tiguan-post-session-questioning",
+      "runtime_prompt": "/tiguan-rehab 质询这堂已完成的合成课，不要报告。唯一内联材料：目标=让学员说明一次复测为何必要；记录=学员能复述，但未记录原始任务复测；该记录缺失仅表示现场待追问，不能写成现场没做。请给一个知行对照并只追问一个问题。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    },
+    {
+      "id": "P06",
+      "expected_route": "tiguan-business-review",
+      "runtime_prompt": "/tiguan-rehab 这是脱敏月度数据，帮我找当前经营断点。唯一内联数据：曝光=100，咨询=10，付费=2，实际使用回传=未知。请列出缺失字段并计算一个可计算漏斗结果；未知不可填零，不得虚构业务数据。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    },
+    {
+      "id": "P07",
+      "expected_route": "tiguan-rehab",
+      "runtime_prompt": "/tiguan-rehab 我不知道先解决什么。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    },
+    {
+      "id": "P08",
+      "expected_route": "tiguan-assessment-session-design",
+      "runtime_prompt": "/tiguan-rehab 我有脱敏问卷，想准备首评。唯一内联问卷：目标=连续办公后转头不适；工作情境=电脑前；无红旗信息。请说明这是一项附加直接能力，并只提出安全的准备问题；不得诊断、处方或把评估称作 Day-0 五路径。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    },
+    {
+      "id": "P09",
+      "expected_route": "tiguan-service-ops",
+      "runtime_prompt": "/tiguan-rehab 仅用明确提供的合成 fixture 预览一次消课。只可使用下列内联 fixture，禁止读取项目数据或其他路径：{visit_id:'SYN-VISIT-09', paid_visits_remaining:3, requested_deduction:1, client_alias:'B'}。请给未写入的消课预览，不能声称已写入或已确认。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    },
+    {
+      "id": "P10",
+      "expected_route": "tiguan-practice-knowledge-base",
+      "runtime_prompt": "/tiguan-rehab 我上传了自己的笔记，想整理成可复用条目。唯一内联笔记：来源=自有复盘；内容=先区分来源事实、治疗师判断、助手推断与未知。请给一个最小可复用条目；不要扫描当前目录或覆盖原资料。",
+      "synthetic_only": true,
+      "run_cwd": "isolated temporary fixture root",
+      "add_dir_scope": "isolated temporary fixture root only",
+      "model_requested": "hy3",
+      "external_timeout_seconds": 60
+    }
+  ]
+}

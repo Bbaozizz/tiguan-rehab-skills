@@ -1,9 +1,21 @@
 {
   "name": "tiguan-rehab",
   "displayName": "体观康复 Skills",
-  "description": "体观康复公开工作流入口，包含评估课设计与隐私/临床边界。",
+  "description": "用 AI 放大康复从业者已有的循证、服务与经营判断。",
   "skills": [
     "./skills/tiguan-rehab",
-    "./skills/tiguan-assessment-session-design"
+    "./skills/tiguan-assessment-session-design",
+    "./skills/tiguan-source-to-practice",
+    "./skills/tiguan-practice-knowledge-base",
+    "./skills/tiguan-service-ops",
+    "./skills/tiguan-post-session-questioning",
+    "./skills/tiguan-business-review"
+  ],
+  "primaryRoutes": [
+    "tiguan-source-to-practice",
+    "tiguan-practice-knowledge-base",
+    "tiguan-service-ops",
+    "tiguan-post-session-questioning",
+    "tiguan-business-review"
   ]
 }

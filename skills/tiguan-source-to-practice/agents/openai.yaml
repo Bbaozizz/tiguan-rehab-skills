@@ -1,0 +1,4 @@
+interface:
+  display_name: "资料变成实践"
+  short_description: "Turn source material into a small verifiable practice action"
+  default_prompt: "Use $tiguan-source-to-practice to turn this material into one small action I can verify."
