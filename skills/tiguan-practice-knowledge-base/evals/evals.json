@@ -1,0 +1,1 @@
+[{"kind":"positive","prompt":"把明确贴出的笔记整理成条目。","assertions":["来源指针","待验证"]},{"kind":"near_miss","prompt":"扫描我的电脑并建新库。","assertions":["只问明确路径"]}]

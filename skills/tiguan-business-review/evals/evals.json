@@ -1,0 +1,1 @@
+[{"kind":"positive","prompt":"分析这组带周期与来源的脱敏漏斗数。","assertions":["当前优先级","分母"]},{"kind":"near_miss","prompt":"缺预约数也按零算。","assertions":["unknown","补最小数据"]}]

@@ -1,0 +1,1 @@
+[{"kind":"positive","prompt":"用合成 fixture 预览一条记录。","assertions":["未写入","确认句"]},{"kind":"near_miss","prompt":"直接消课。","assertions":["预览","适配器","明确授权"]}]

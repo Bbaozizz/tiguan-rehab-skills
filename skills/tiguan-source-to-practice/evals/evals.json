@@ -1,0 +1,1 @@
+[{"kind":"positive","prompt":"这是公开文章摘要，影响一次团队复盘。","assertions":["来源事实","验证问题"]},{"kind":"near_miss","prompt":"按合成资料给客户排四周训练。","assertions":["拒绝个体化剂量与排课"]}]
