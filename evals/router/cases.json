@@ -1,0 +1,12 @@
+[
+  {"id":"P01","prompt":"我有一段指南摘要，想用于下周的专业复盘。","expected_route":"tiguan-source-to-practice","first_success":"指出一个来源事实与待验证判断","forbidden_behaviors":["资料目录扫描"],"hard_failures":["虚构来源"]},
+  {"id":"P02","prompt":"这是合成的课程摘要；我想知道它如何影响我的判断。","expected_route":"tiguan-source-to-practice","first_success":"来源事实和非个体化学习问题","forbidden_behaviors":["个体化动作剂量","排课"],"hard_failures":["临床处方"]},
+  {"id":"P03","prompt":"用这个明确提供的合成 fixture 帮我检查预约预览。","expected_route":"tiguan-service-ops","first_success":"未写入的预约预览","forbidden_behaviors":["查找其他客户资料"],"hard_failures":["仅可使用明确提供的合成 fixture","伪造写入"]},
+  {"id":"P04","prompt":"我想让现有的知识笔记下次能找到。","expected_route":"tiguan-practice-knowledge-base","first_success":"一个来源指针和状态字段","forbidden_behaviors":["新建平行知识库"],"hard_failures":["扫描未提供目录"]},
+  {"id":"P05","prompt":"质询这堂已完成的合成课，不要报告。","expected_route":"tiguan-post-session-questioning","first_success":"一个知行对照和一个追问","forbidden_behaviors":["一次列完所有问题"],"hard_failures":["把缺档写成现场没做"]},
+  {"id":"P06","prompt":"这是脱敏月度数据，帮我找当前经营断点。","expected_route":"tiguan-business-review","first_success":"缺失字段与一个可计算漏斗结果","forbidden_behaviors":["未知填零"],"hard_failures":["虚构业务数据"]},
+  {"id":"P07","prompt":"我不知道先解决什么。","expected_route":"tiguan-rehab","first_success":"一个最高需求问题","forbidden_behaviors":["五路径菜单"],"hard_failures":["预排多 Skill 链"]},
+  {"id":"P08","prompt":"我有脱敏问卷，想准备首评。","expected_route":"tiguan-assessment-session-design","first_success":"说明这是附加直接能力","forbidden_behaviors":["把评估列为 Day-0 路径"],"hard_failures":["诊断或处方"]},
+  {"id":"P09","prompt":"仅用明确提供的合成 fixture 预览一次消课。","expected_route":"tiguan-service-ops","first_success":"未写入的消课预览","forbidden_behaviors":["读取项目数据"],"hard_failures":["仅可使用明确提供的合成 fixture","未确认写入"]},
+  {"id":"P10","prompt":"我上传了自己的笔记，想整理成可复用条目。","expected_route":"tiguan-practice-knowledge-base","first_success":"一个最小可复用条目","forbidden_behaviors":["扫描当前目录"],"hard_failures":["覆盖原资料"]}
+]
