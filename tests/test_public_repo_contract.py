@@ -16,6 +16,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL_NAMES = {
     "tiguan-rehab",
     "tiguan-assessment-session-design",
+    "tiguan-source-to-practice",
+    "tiguan-practice-knowledge-base",
+    "tiguan-service-ops",
+    "tiguan-post-session-questioning",
+    "tiguan-business-review",
 }
 
 
@@ -100,10 +105,10 @@ class PublicRepoContractTest(unittest.TestCase):
         ]:
             self.assertIn(capability, guide)
             self.assertIn(capability, skill_map)
-        self.assertIn("当前安装包包含 2 个已发布 Skill", guide)
+        self.assertIn("当前安装包包含 7 个已发布 Skill", guide)
         self.assertIn("只路由已发布能力", skill_map)
-        self.assertNotIn("课后交付</text>", skill_map)
-        self.assertNotIn("进度 / 经营</text>", skill_map)
+        self.assertIn("/tiguan-post-session-questioning", skill_map)
+        self.assertIn("/tiguan-business-review", skill_map)
 
     def test_license_is_noncommercial_and_attribution_required(self) -> None:
         license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
@@ -158,7 +163,101 @@ class PublicRepoContractTest(unittest.TestCase):
             self.assertRegex(text, rf"(?m)^name: {re.escape(name)}$")
             self.assertIn("description:", text)
 
-    def test_assessment_skill_uses_the_ten_question_intake_contract(self) -> None:
+    def test_five_new_skills_have_distinct_first_success_contracts(self) -> None:
+        expected_markers = {
+            "tiguan-source-to-practice": [
+                "不以“总结完资料”为成功",
+                "来源事实",
+                "最小实践动作",
+                "验证标准",
+            ],
+            "tiguan-practice-knowledge-base": [
+                "不以“收藏了多少资料”为成功",
+                "来源指针",
+                "已验证",
+                "待验证",
+            ],
+            "tiguan-service-ops": [
+                "preview -> confirm -> apply -> readback",
+                "预约",
+                "正式记录",
+                "消课",
+                "家庭作业卡",
+            ],
+            "tiguan-post-session-questioning": [
+                "这是一场多轮追问",
+                "一次只深挖一条",
+                "档案没写不等于现场没做",
+            ],
+            "tiguan-business-review": [
+                "未检查不能记0",
+                "引流效率",
+                "预约转化",
+                "交付效率",
+                "消课闭环",
+            ],
+        }
+        for name, markers in expected_markers.items():
+            text = (ROOT / "skills" / name / "SKILL.md").read_text(encoding="utf-8")
+            for marker in markers:
+                self.assertIn(marker, text, f"{name}: {marker}")
+
+    def test_router_only_routes_released_capabilities(self) -> None:
+        router = (ROOT / "skills/tiguan-rehab/SKILL.md").read_text(encoding="utf-8")
+        for name in SKILL_NAMES - {"tiguan-rehab"}:
+            self.assertIn(f"/{name}", router)
+        self.assertNotIn("当前公开包尚未发布对应 Skill", router)
+
+    def test_router_discovers_need_and_material_before_routing(self) -> None:
+        router = (ROOT / "skills/tiguan-rehab/SKILL.md").read_text(encoding="utf-8")
+        for marker in [
+            "一次只问一个问题",
+            "最想先解决",
+            "已经有什么可以用的材料",
+            "需求优先",
+            "资料就绪度",
+            "最短反馈",
+            "不要重复询问",
+        ]:
+            self.assertIn(marker, router, marker)
+
+    def test_router_continues_into_first_success_without_reentry(self) -> None:
+        router = (ROOT / "skills/tiguan-rehab/SKILL.md").read_text(encoding="utf-8")
+        for marker in [
+            "不要求用户再调用",
+            "立即按对应 Skill 继续执行",
+            "你最在意的",
+            "你已经有的材料",
+            "先走这条",
+            "现在就开始",
+        ]:
+            self.assertIn(marker, router, marker)
+
+        example = ROOT / "skills/tiguan-rehab/examples/guided-first-run.md"
+        self.assertTrue(example.is_file())
+        example_text = example.read_text(encoding="utf-8")
+        self.assertIn("WorkBuddy", example_text)
+        self.assertIn("第一轮只问", example_text)
+        self.assertIn("/tiguan-rehab", example_text)
+
+    def test_service_ops_keeps_business_states_separate(self) -> None:
+        text = (ROOT / "skills/tiguan-service-ops/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("生成草稿不等于已写入", text)
+        self.assertIn("正式记录写入不等于已消课", text)
+        self.assertIn("消课不等于已发送客户提醒", text)
+        self.assertIn("没有已配置适配器", text)
+
+    def test_each_new_skill_has_a_synthetic_first_run(self) -> None:
+        for name in SKILL_NAMES - {"tiguan-rehab", "tiguan-assessment-session-design"}:
+            example = ROOT / "skills" / name / "examples/first-run.md"
+            self.assertTrue(example.is_file(), name)
+            text = example.read_text(encoding="utf-8")
+            self.assertIn("合成", text, name)
+            self.assertIn("第一次", text, name)
+
+    def test_assessment_skill_treats_the_ten_question_form_as_a_starter(self) -> None:
         skill_dir = ROOT / "skills/tiguan-assessment-session-design"
         questionnaire = (skill_dir / "assets/intake-questionnaire-template.md").read_text(
             encoding="utf-8"
@@ -173,8 +272,57 @@ class PublicRepoContractTest(unittest.TestCase):
         self.assertIn("可多选，最多选择 2 项", questionnaire)
         self.assertIn("为了让康复师提前准备，你还有哪些资料可以提供？", questionnaire)
         self.assertNotIn("你之前尝试过什么？", questionnaire)
-        self.assertIn("Q01–Q10 字段映射", skill_text)
-        self.assertIn("安全筛查未由该问卷完成", skill_text)
+        self.assertIn("内置起步模板", questionnaire)
+        self.assertIn("不要要求用户把自己的问卷改写成 Q01–Q10", skill_text)
+        self.assertIn("自己的问卷优先", skill_text)
+
+    def test_assessment_skill_separates_setup_prep_and_optional_post_session(self) -> None:
+        skill_dir = ROOT / "skills/tiguan-assessment-session-design"
+        skill_text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+
+        for mode in ["问卷设置模式", "课前准备模式", "课后可选模式"]:
+            self.assertIn(mode, skill_text)
+        self.assertIn("保留原题号和问题原文", skill_text)
+        self.assertIn("没有现场事实时停在课前准备", skill_text)
+
+        pre_session_output = re.search(
+            r"## 课前准备默认输出\n\n```text\n(?P<body>.*?)\n```",
+            skill_text,
+            flags=re.DOTALL,
+        )
+        self.assertIsNotNone(pre_session_output)
+        body = pre_session_output.group("body")
+        self.assertIn("脱敏答卷事实卡", body)
+        self.assertIn("现场待追问", body)
+        self.assertNotIn("客户提醒", body)
+        self.assertNotIn("报告", body)
+        self.assertNotIn("PDF", body)
+
+    def test_public_guide_leads_with_questionnaire_setup_and_pre_session_prep(self) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        guide = (ROOT / "docs/getting-started.md").read_text(encoding="utf-8")
+        english = (ROOT / "README.en.md").read_text(encoding="utf-8")
+
+        for text in [readme, guide]:
+            self.assertIn("上传自己的问卷", text)
+            self.assertIn("问卷答案", text)
+            self.assertIn("课前准备", text)
+            self.assertIn("PDF 是可选项", text)
+        self.assertIn("upload your own questionnaire", english)
+        self.assertIn("pre-session preparation", english)
+
+    def test_assessment_skill_includes_first_success_examples(self) -> None:
+        examples = ROOT / "skills/tiguan-assessment-session-design/examples"
+        setup = examples / "questionnaire-setup-prompt.md"
+        prep = examples / "custom-questionnaire-answers.md"
+
+        self.assertTrue(setup.is_file())
+        self.assertTrue(prep.is_file())
+        self.assertIn("上传自己的问卷", setup.read_text(encoding="utf-8"))
+        prep_text = prep.read_text(encoding="utf-8")
+        self.assertIn("脱敏问卷答案", prep_text)
+        self.assertIn("课前准备", prep_text)
+        self.assertNotIn("Q01", prep_text)
 
     def test_public_files_do_not_leak_private_runtime_details(self) -> None:
         forbidden_patterns = [

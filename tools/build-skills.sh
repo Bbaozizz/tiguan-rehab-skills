@@ -24,7 +24,15 @@ root = Path(sys.argv[1])
 out = Path(sys.argv[2])
 stage = Path(sys.argv[3])
 version = sys.argv[4]
-skill_names = ("tiguan-rehab", "tiguan-assessment-session-design")
+skill_names = (
+    "tiguan-rehab",
+    "tiguan-assessment-session-design",
+    "tiguan-source-to-practice",
+    "tiguan-practice-knowledge-base",
+    "tiguan-service-ops",
+    "tiguan-post-session-questioning",
+    "tiguan-business-review",
+)
 
 for name in skill_names:
     source = root / "skills" / name
@@ -39,7 +47,12 @@ for name in skill_names:
     f"# 体观康复 Skills {version}\n\n"
     "每个 zip 都是独立 Skill，解压后根目录为 SKILL.md。\n\n"
     "- tiguan-rehab.zip：统一入口与路由。\n"
-    "- tiguan-assessment-session-design.zip：评估课设计、模板、合成案例与可打印报告。\n\n"
+    "- tiguan-assessment-session-design.zip：问卷设置、答卷课前准备、合成案例与可选报告。\n\n"
+    "- tiguan-source-to-practice.zip：资料到可验证实践。\n"
+    "- tiguan-practice-knowledge-base.zip：个人工作知识库。\n"
+    "- tiguan-service-ops.zip：客户服务运营预览与安全执行。\n"
+    "- tiguan-post-session-questioning.zip：证据驱动的课后质询。\n"
+    "- tiguan-business-review.zip：脱敏经营漏斗分析。\n\n"
     "使用脱敏输入；AI 不替代临床判断与责任。\n",
     encoding="utf-8",
 )

@@ -1,0 +1,4 @@
+interface:
+  display_name: "个人工作知识库"
+  short_description: "Build a provenance-aware knowledge base for daily practice"
+  default_prompt: "Use $tiguan-practice-knowledge-base to organize this into my practice knowledge base."

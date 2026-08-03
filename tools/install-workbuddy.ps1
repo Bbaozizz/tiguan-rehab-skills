@@ -11,7 +11,12 @@ Set-StrictMode -Version Latest
 
 $SkillNames = @(
     "tiguan-rehab",
-    "tiguan-assessment-session-design"
+    "tiguan-assessment-session-design",
+    "tiguan-source-to-practice",
+    "tiguan-practice-knowledge-base",
+    "tiguan-service-ops",
+    "tiguan-post-session-questioning",
+    "tiguan-business-review"
 )
 $TempSource = $null
 $StageDir = $null

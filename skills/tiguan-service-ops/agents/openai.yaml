@@ -1,0 +1,4 @@
+interface:
+  display_name: "客户服务运营"
+  short_description: "Safely preview and run service operations"
+  default_prompt: "Use $tiguan-service-ops to preview this service operation before any write."

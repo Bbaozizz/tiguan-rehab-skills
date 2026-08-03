@@ -8,6 +8,11 @@ WORKBUDDY_HOME="${WORKBUDDY_HOME:-${HOME}/.workbuddy}"
 SKILL_NAMES=(
   "tiguan-rehab"
   "tiguan-assessment-session-design"
+  "tiguan-source-to-practice"
+  "tiguan-practice-knowledge-base"
+  "tiguan-service-ops"
+  "tiguan-post-session-questioning"
+  "tiguan-business-review"
 )
 
 usage() {

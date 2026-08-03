@@ -14,6 +14,11 @@ INSTALLER = ROOT / "tools/install-workbuddy.sh"
 SKILL_NAMES = (
     "tiguan-rehab",
     "tiguan-assessment-session-design",
+    "tiguan-source-to-practice",
+    "tiguan-practice-knowledge-base",
+    "tiguan-service-ops",
+    "tiguan-post-session-questioning",
+    "tiguan-business-review",
 )
 
 
@@ -33,7 +38,7 @@ class WorkBuddyInstallerTest(unittest.TestCase):
             text=True,
         )
 
-    def test_installs_both_skills_into_workbuddy_home(self) -> None:
+    def test_installs_all_public_skills_into_workbuddy_home(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             workbuddy_home = Path(temp_dir) / ".workbuddy"
 
