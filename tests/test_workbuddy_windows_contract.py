@@ -28,7 +28,7 @@ class WorkBuddyWindowsContractTest(unittest.TestCase):
 
         self.assertIn("windows-latest", workflow)
         self.assertIn("tools/install-workbuddy.ps1", workflow)
-        self.assertIn("tiguan-assessment-session-design", workflow)
+        self.assertIn(".claude-plugin/plugin.json", workflow)
         self.assertIn("my-private-skill", workflow)
 
 

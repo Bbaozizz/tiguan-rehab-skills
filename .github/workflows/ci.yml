@@ -26,10 +26,17 @@ jobs:
         run: |
           python3 -m unittest discover -s tests -v
           python3 tools/check-publication-readiness.py
+          python3 tools/check-routing-contract.py
       - name: Validate Skills
         run: |
-          python3 tools/quick_validate_skill.py skills/tiguan-rehab
-          python3 tools/quick_validate_skill.py skills/tiguan-assessment-session-design
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+          plugin = json.loads(Path(".claude-plugin/plugin.json").read_text())
+          for item in plugin["skills"]:
+              subprocess.run(["python3", "tools/quick_validate_skill.py", item.removeprefix("./")], check=True)
+          PY
           claude plugin validate .
       - name: Build release bundle
         run: bash tools/build-skills.sh
@@ -48,7 +55,8 @@ jobs:
 
           & "$PWD/tools/install-workbuddy.ps1" -SourceDir "$PWD" -WorkBuddyHome $WorkBuddyHome
 
-          foreach ($Name in @("tiguan-rehab", "tiguan-assessment-session-design")) {
+          $Plugin = Get-Content -LiteralPath "$PWD/.claude-plugin/plugin.json" -Raw | ConvertFrom-Json
+          foreach ($Name in $Plugin.skills | ForEach-Object { $_.Substring("./skills/".Length) }) {
             $SkillFile = Join-Path $WorkBuddyHome "skills/$Name/SKILL.md"
             if (-not (Test-Path -LiteralPath $SkillFile -PathType Leaf)) {
               throw "Missing installed Skill: $Name"

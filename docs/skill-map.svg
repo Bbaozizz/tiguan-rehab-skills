@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100" role="img" aria-labelledby="title desc">
   <title id="title">体观康复 Skills v0.2.0 能力地图</title>
-  <desc id="desc">引导入口先识别最高需求和已有材料，只路由已发布能力，将七个 Skill 组合成学习、知识、服务、质询与经营闭环。</desc>
+  <desc id="desc">引导入口先识别最高需求和已有材料，只在五条 Day-0 路径中路由；评估课是附加的直接调用能力。</desc>
   <defs>
     <style>
       .bg{fill:#f3efe4}.ink{fill:#17352d}.card{fill:#fffdf6;stroke:#17352d;stroke-width:3}.accent{fill:#b1462f}.title{font:700 34px 'Noto Serif SC','Songti SC',serif;fill:#fffdf6}.head{font:700 23px 'Noto Sans SC','PingFang SC',sans-serif;fill:#17352d}.body{font:500 16px 'Noto Sans SC','PingFang SC',sans-serif;fill:#56645f}.white{fill:#fffdf6}.line{stroke:#17352d;stroke-width:3;fill:none}
@@ -13,7 +13,7 @@
   <rect x="330" y="180" width="740" height="110" rx="8" class="card"/>
   <rect x="330" y="180" width="16" height="110" class="accent"/>
   <text x="390" y="226" class="head">/tiguan-rehab 引导入口</text>
-  <text x="390" y="260" class="body">最高需求 × 已有材料 · 只路由已发布能力 · 直接开始</text>
+  <text x="390" y="260" class="body">最高需求 × 已有材料 · 五条 Day-0 路径 · 只路由已发布能力 · 直接开始</text>
 
   <path d="M700 290V340M190 340H1210M190 340V380M525 340V380M875 340V380M1210 340V380" class="line"/>
 
@@ -27,7 +27,7 @@
   <rect x="385" y="380" width="280" height="250" rx="8" class="card"/>
   <text x="420" y="425" class="head">可验证服务设计</text>
   <text x="420" y="466" class="body">/tiguan-assessment-session-design</text>
-  <text x="420" y="496" class="body">自有问卷 → 课前准备</text>
+  <text x="420" y="496" class="body">附加直接调用：问卷 → 课前准备</text>
   <text x="420" y="546" class="body">/tiguan-service-ops</text>
   <text x="420" y="576" class="body">预览 → 确认 → 执行 → 回读</text>
 

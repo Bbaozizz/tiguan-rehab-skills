@@ -94,6 +94,18 @@ class PublicRepoContractTest(unittest.TestCase):
         self.assertIn("规划中的能力不等于已经可安装", readme)
         self.assertNotIn("GitHub Pages", readme)
 
+    def test_public_surfaces_lead_with_the_five_path_first_run(self) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        guide = (ROOT / "docs/getting-started.md").read_text(encoding="utf-8")
+        for text in [readme, guide]:
+            self.assertIn("/tiguan-rehab", text)
+            self.assertIn("五条", text)
+            self.assertIn("附加的直接调用能力", text)
+        ci = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+        release = (ROOT / ".github/workflows/release.yml").read_text(encoding="utf-8")
+        self.assertIn("plugin.json", ci)
+        self.assertIn("dist/skills/*.zip", release)
+
     def test_public_guide_and_map_share_the_capability_framework(self) -> None:
         guide = (ROOT / "docs/getting-started.md").read_text(encoding="utf-8")
         skill_map = (ROOT / "docs/skill-map.svg").read_text(encoding="utf-8")
@@ -228,10 +240,9 @@ class PublicRepoContractTest(unittest.TestCase):
         for marker in [
             "一次只问一个问题",
             "最想先解决",
-            "已经有什么可以用的材料",
-            "需求优先",
-            "资料就绪度",
-            "最短反馈",
+            "已经有什么**脱敏或可公开**的材料",
+            "最高需求相关性",
+            "最短可复核反馈",
             "不要重复询问",
         ]:
             self.assertIn(marker, router, marker)
@@ -239,12 +250,12 @@ class PublicRepoContractTest(unittest.TestCase):
     def test_router_continues_into_first_success_without_reentry(self) -> None:
         router = (ROOT / "skills/tiguan-rehab/SKILL.md").read_text(encoding="utf-8")
         for marker in [
-            "不要求用户再调用",
-            "立即按对应 Skill 继续执行",
-            "你最在意的",
-            "你已经有的材料",
-            "先走这条",
-            "现在就开始",
+            "不要要求用户再输入 slash 命令",
+            "立即开始叶子 Skill 的第一项实质动作",
+            "最高需求：",
+            "选中路由：",
+            "选择一条路径",
+            "现在开始",
         ]:
             self.assertIn(marker, router, marker)
 

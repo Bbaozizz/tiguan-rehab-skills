@@ -27,6 +27,4 @@ jobs:
           gh release create "$GITHUB_REF_NAME" \
             --title "$GITHUB_REF_NAME" \
             --generate-notes \
-            "dist/skills/tiguan-rehab.zip" \
-            "dist/skills/tiguan-assessment-session-design.zip" \
-            "dist/skills/tiguan-rehab-skills-${VERSION}.zip"
+            dist/skills/*.zip
