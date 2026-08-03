@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 
@@ -13,6 +14,7 @@ from skill_registry import RegistryError, load_registry
 FORBIDDEN_DISCOVERY = ("扫描当前工作目录", "扫描工作区", "broad workspace discovery")
 RETURN_MARKER = "返回 `/tiguan-rehab`"
 DIRECT_LEAF_MARKER = "不得直接路由到另一个叶子 Skill"
+SLASH_COMMAND = re.compile(r"(?<![A-Za-z0-9-])/([a-z0-9][a-z0-9-]*)")
 
 
 def check(repo_root: Path) -> list[str]:
@@ -40,6 +42,15 @@ def check(repo_root: Path) -> list[str]:
                 errors.append(f"missing return footer: {skill_id}")
             if DIRECT_LEAF_MARKER not in text:
                 errors.append(f"missing direct-route prohibition: {skill_id}")
+            direct_routes = {
+                route_id
+                for route_id in SLASH_COMMAND.findall(text)
+                if route_id in registry.primary_route_ids and route_id != skill_id
+            }
+            if direct_routes:
+                errors.append(
+                    f"direct primary leaf route in {skill_id}: {sorted(direct_routes)}"
+                )
     return errors
 
 

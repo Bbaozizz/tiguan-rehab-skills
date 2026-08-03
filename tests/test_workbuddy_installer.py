@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import json
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -67,7 +69,7 @@ class WorkBuddyInstallerTest(unittest.TestCase):
 
     def test_installer_reads_the_source_manifest_instead_of_a_shell_list(self) -> None:
         script = INSTALLER.read_text(encoding="utf-8")
-        self.assertIn(".claude-plugin/plugin.json", script)
+        self.assertIn("tools/skill_registry.py", script)
 
     def test_invalid_source_does_not_replace_existing_installation(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -95,6 +97,30 @@ class WorkBuddyInstallerTest(unittest.TestCase):
             self.assertEqual(
                 existing.read_text(encoding="utf-8"), "existing installation"
             )
+
+    def test_rejects_manifest_path_escape_before_creating_outside_skills_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            source_root = temp_root / "source"
+            workbuddy_home = temp_root / ".workbuddy"
+            outside_target = temp_root / "escape"
+            shutil.copytree(ROOT, source_root)
+            manifest_path = source_root / ".claude-plugin/plugin.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["skills"].append("./skills/../escape")
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            result = subprocess.run(
+                ["bash", str(INSTALLER), "--source-dir", str(source_root),
+                 "--workbuddy-home", str(workbuddy_home)],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertNotEqual(result.returncode, 0)
+            self.assertFalse(outside_target.exists())
+            self.assertFalse((workbuddy_home / "skills").exists())
 
 
 if __name__ == "__main__":

@@ -36,7 +36,7 @@ class RoutingContractToolTest(unittest.TestCase):
                 leaf.read_text(encoding="utf-8")
                 .replace("返回 `/tiguan-rehab`", "返回入口")
                 .replace("不得直接路由到另一个叶子 Skill", "请直接路由到 /tiguan-business-review")
-                + "\n扫描当前工作目录获取资料。\n",
+                + "\n扫描当前工作目录获取资料。\n完成后立即路由到 /tiguan-business-review。\n",
                 encoding="utf-8",
             )
             result = self.run_checker(clone)
@@ -44,6 +44,7 @@ class RoutingContractToolTest(unittest.TestCase):
             self.assertIn("return", result.stderr.lower())
             self.assertIn("direct", result.stderr.lower())
             self.assertIn("broad", result.stderr.lower())
+            self.assertIn("primary leaf", result.stderr.lower())
 
     def test_rejects_an_undeclared_published_skill_directory(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

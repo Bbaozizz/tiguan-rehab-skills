@@ -20,6 +20,22 @@ function Remove-InstallerPath {
     }
 }
 
+function Assert-TargetWithinSkillsRoot {
+    param([string]$Root, [string]$Target)
+
+    $ResolvedRoot = (Resolve-Path -LiteralPath $Root).Path.TrimEnd('\', '/')
+    if (Test-Path -LiteralPath $Target) {
+        $ResolvedTarget = (Resolve-Path -LiteralPath $Target).Path
+    }
+    else {
+        $ResolvedTarget = [System.IO.Path]::GetFullPath($Target)
+    }
+    $Prefix = $ResolvedRoot + [System.IO.Path]::DirectorySeparatorChar
+    if (-not $ResolvedTarget.StartsWith($Prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing target outside Skills root: $ResolvedTarget"
+    }
+}
+
 try {
     if ($SourceDir) {
         if (-not (Test-Path -LiteralPath $SourceDir -PathType Container)) {
@@ -49,17 +65,14 @@ try {
         $RepoRoot = $ExtractedRoots[0].FullName
     }
 
-    $ManifestPath = Join-Path $RepoRoot ".claude-plugin/plugin.json"
-    if (-not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) {
-        throw "Invalid package: missing .claude-plugin/plugin.json"
+    $RegistryScript = Join-Path $RepoRoot "tools/skill_registry.py"
+    if (-not (Test-Path -LiteralPath $RegistryScript -PathType Leaf)) {
+        throw "Invalid package: missing tools/skill_registry.py"
     }
-    $Manifest = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
-    $SkillNames = @($Manifest.skills | ForEach-Object {
-        if ($_ -isnot [string] -or -not $_.StartsWith("./skills/")) {
-            throw "Invalid package: malformed published Skill path"
-        }
-        $_.Substring("./skills/".Length)
-    })
+    $SkillNames = @(& python $RegistryScript --repo-root $RepoRoot --published-skill-ids)
+    if ($LASTEXITCODE -ne 0) {
+        throw "Invalid package: strict skill registry validation failed"
+    }
     if ($SkillNames.Count -eq 0) {
         throw "Invalid package: .claude-plugin/plugin.json declares no skills"
     }
@@ -73,6 +86,7 @@ try {
 
     $TargetRoot = Join-Path $WorkBuddyHome "skills"
     New-Item -ItemType Directory -Path $TargetRoot -Force | Out-Null
+    $TargetRoot = (Resolve-Path -LiteralPath $TargetRoot).Path
     $StageDir = Join-Path $TargetRoot (
         ".tiguan-install." + [System.Guid]::NewGuid().ToString("N")
     )
@@ -82,6 +96,7 @@ try {
     New-Item -ItemType Directory -Path $BackupRoot -Force | Out-Null
 
     foreach ($Name in $SkillNames) {
+        Assert-TargetWithinSkillsRoot -Root $TargetRoot -Target (Join-Path $TargetRoot $Name)
         Copy-Item `
             -LiteralPath (Join-Path $RepoRoot "skills/$Name") `
             -Destination (Join-Path $NewRoot $Name) `
@@ -93,6 +108,7 @@ try {
     try {
         foreach ($Name in $SkillNames) {
             $Target = Join-Path $TargetRoot $Name
+            Assert-TargetWithinSkillsRoot -Root $TargetRoot -Target $Target
             $Backup = Join-Path $BackupRoot $Name
             if (Test-Path -LiteralPath $Target) {
                 Move-Item -LiteralPath $Target -Destination $Backup

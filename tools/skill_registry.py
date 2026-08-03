@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import json
+import argparse
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import FrozenSet
@@ -62,3 +64,23 @@ def load_registry(repo_root: Path) -> SkillRegistry:
         raise RegistryError("primaryRoutes must contain exactly five route IDs")
 
     return SkillRegistry(frozenset(published_ids), frozenset(route_ids))
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo-root", type=Path, required=True)
+    parser.add_argument("--published-skill-ids", action="store_true")
+    args = parser.parse_args()
+    if not args.published_skill_ids:
+        parser.error("--published-skill-ids is required")
+    try:
+        registry = load_registry(args.repo_root)
+    except RegistryError as error:
+        print(f"invalid skill registry: {error}", file=sys.stderr)
+        return 1
+    print("\n".join(sorted(registry.published_skill_ids)))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

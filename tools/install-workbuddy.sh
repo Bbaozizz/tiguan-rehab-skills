@@ -111,20 +111,8 @@ SKILL_NAMES=()
 while IFS= read -r skill_name; do
   [[ -n "$skill_name" ]] && SKILL_NAMES+=("$skill_name")
 done < <(
-  python3 - "$REPO_ROOT/.claude-plugin/plugin.json" <<'PY'
-import json
-import sys
-from pathlib import Path
-
-manifest = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
-skills = manifest.get("skills")
-if not isinstance(skills, list):
-    raise SystemExit("Invalid package: .claude-plugin/plugin.json has no skills list")
-for item in skills:
-    if not isinstance(item, str) or not item.startswith("./skills/"):
-        raise SystemExit("Invalid package: malformed published Skill path")
-    print(item.removeprefix("./skills/"))
-PY
+  python3 "$REPO_ROOT/tools/skill_registry.py" \
+    --repo-root "$REPO_ROOT" --published-skill-ids
 )
 
 if [[ ${#SKILL_NAMES[@]} -eq 0 ]]; then
@@ -141,10 +129,27 @@ done
 
 TARGET_ROOT="$WORKBUDDY_HOME/skills"
 mkdir -p "$TARGET_ROOT"
+TARGET_ROOT="$(cd "$TARGET_ROOT" && pwd -P)"
+
+assert_target_within_skills_root() {
+  python3 - "$TARGET_ROOT" "$1" <<'PY'
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1]).resolve()
+target = Path(sys.argv[2]).resolve(strict=False)
+try:
+    target.relative_to(root)
+except ValueError:
+    raise SystemExit(f"Refusing target outside Skills root: {target}")
+PY
+}
+
 STAGE_DIR="$(mktemp -d "$TARGET_ROOT/.tiguan-install.XXXXXX")"
 mkdir -p "$STAGE_DIR/new" "$STAGE_DIR/backup"
 
 for name in "${SKILL_NAMES[@]}"; do
+  assert_target_within_skills_root "$TARGET_ROOT/$name"
   cp -R "$REPO_ROOT/skills/$name" "$STAGE_DIR/new/$name"
 done
 
@@ -152,6 +157,7 @@ INSTALLED_NAMES=()
 INSTALL_FAILED=0
 for name in "${SKILL_NAMES[@]}"; do
   target="$TARGET_ROOT/$name"
+  assert_target_within_skills_root "$target"
   if [[ -e "$target" || -L "$target" ]]; then
     if ! mv "$target" "$STAGE_DIR/backup/$name"; then
       INSTALL_FAILED=1

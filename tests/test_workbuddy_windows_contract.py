@@ -16,7 +16,8 @@ class WorkBuddyWindowsContractTest(unittest.TestCase):
     def test_powershell_installer_manages_only_the_public_skills(self) -> None:
         script = INSTALLER.read_text(encoding="utf-8")
 
-        self.assertIn(".claude-plugin/plugin.json", script)
+        self.assertIn("tools/skill_registry.py", script)
+        self.assertIn("Resolve-Path", script)
         self.assertNotIn("$SkillNames = @(\n    \"tiguan-rehab\"", script)
         self.assertIn(".workbuddy", script)
         self.assertIn("SKILL.md", script)

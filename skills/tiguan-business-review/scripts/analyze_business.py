@@ -128,7 +128,10 @@ def provenance_conflicts(payload: Dict[str, Any]) -> List[str]:
         definitions = {}
     for _, numerator, denominator, _ in METRICS:
         for field in (numerator, denominator):
-            if payload.get(field) is not None and not isinstance(definitions.get(field), str):
+            definition = definitions.get(field)
+            if payload.get(field) is not None and (
+                not isinstance(definition, str) or not definition.strip()
+            ):
                 conflicts.append(f"missing metric definition: {field}")
     declared = payload.get("metadata")
     if declared is not None:

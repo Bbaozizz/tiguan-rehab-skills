@@ -95,6 +95,16 @@ class BusinessReviewTest(unittest.TestCase):
         self.assertEqual(output["status"], "invalid")
         self.assertIn("metadata_conflicts", output)
 
+    def test_blank_metric_definitions_are_invalid(self) -> None:
+        for definition in ["", "   "]:
+            metadata = self.metadata()
+            metadata["metric_definitions"]["inquiries"] = definition
+            result, output = self.run_case(
+                {"period": "2026-07", **metadata, "inquiries": 4}
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("missing metric definition: inquiries", output["metadata_conflicts"])
+
 
 if __name__ == "__main__":
     unittest.main()
