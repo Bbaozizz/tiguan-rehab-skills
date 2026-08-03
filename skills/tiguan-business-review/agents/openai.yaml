@@ -1,4 +1,4 @@
 interface:
   display_name: "经营分析"
-  short_description: "Calculate funnel metrics and find the current bottleneck"
-  default_prompt: "Use $tiguan-business-review to analyze my de-identified operating data and find the next priority."
+  short_description: "Collect minimum business data or find the current bottleneck"
+  default_prompt: "Use $tiguan-business-review to create a minimum seven-day collection sheet if I have no data, or analyze my de-identified operating data and find one next priority."

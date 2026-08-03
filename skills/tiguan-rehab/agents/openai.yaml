@@ -1,4 +1,4 @@
 interface:
   display_name: "体观康复引导入口"
-  short_description: "Find the highest need and start the fastest useful path"
-  default_prompt: "Use $tiguan-rehab to find what matters most, inspect what material I already have, and start the fastest useful first task."
+  short_description: "Start one useful rehab task with no prior system required"
+  default_prompt: "Use $tiguan-rehab to find what matters most and start one useful task from what I can safely provide now, without assuming I already have a knowledge base, client archive, spreadsheet, or adapter."

@@ -1,4 +1,4 @@
 interface:
   display_name: "课后质询"
-  short_description: "Use evidence-led questioning to uncover knowledge-action gaps"
-  default_prompt: "Use $tiguan-post-session-questioning to question this completed session one issue at a time."
+  short_description: "Question one completed session, even from a verbal account"
+  default_prompt: "Use $tiguan-post-session-questioning to question this completed session one issue at a time, and label my after-the-fact account separately if no original archive exists."

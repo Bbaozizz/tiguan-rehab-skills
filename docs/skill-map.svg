@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100" role="img" aria-labelledby="title desc">
   <title id="title">体观康复 Skills v0.2.0 能力地图</title>
-  <desc id="desc">引导入口先识别最高需求和已有材料，只在五条 Day-0 路径中路由；评估课是附加的直接调用能力。</desc>
+  <desc id="desc">不要求知识库、客户档案、经营表或系统接口；引导入口从当前可提供内容开始，只在五条 Day-0 路径中路由。</desc>
   <defs>
     <style>
       .bg{fill:#f3efe4}.ink{fill:#17352d}.card{fill:#fffdf6;stroke:#17352d;stroke-width:3}.accent{fill:#b1462f}.title{font:700 34px 'Noto Serif SC','Songti SC',serif;fill:#fffdf6}.head{font:700 23px 'Noto Sans SC','PingFang SC',sans-serif;fill:#17352d}.body{font:500 16px 'Noto Sans SC','PingFang SC',sans-serif;fill:#56645f}.white{fill:#fffdf6}.line{stroke:#17352d;stroke-width:3;fill:none}
@@ -13,14 +13,14 @@
   <rect x="330" y="180" width="740" height="110" rx="8" class="card"/>
   <rect x="330" y="180" width="16" height="110" class="accent"/>
   <text x="390" y="226" class="head">/tiguan-rehab 引导入口</text>
-  <text x="390" y="260" class="body">最高需求 × 已有材料 · 五条 Day-0 路径 · 只路由已发布能力 · 直接开始</text>
+  <text x="390" y="260" class="body">零基础设施可开始 · 最高需求 × 当前材料 · 只路由已发布能力</text>
 
   <path d="M700 290V340M190 340H1210M190 340V380M525 340V380M875 340V380M1210 340V380" class="line"/>
 
   <rect x="70" y="380" width="280" height="250" rx="8" class="card"/>
   <text x="105" y="425" class="head">实践认知校准</text>
   <text x="105" y="466" class="body">/tiguan-source-to-practice</text>
-  <text x="105" y="496" class="body">资料 → 最小实践 → 验证</text>
+  <text x="105" y="496" class="body">先讲理解 → 对照偏差 → 验证</text>
   <text x="105" y="546" class="body">/tiguan-post-session-questioning</text>
   <text x="105" y="576" class="body">知 × 行 → 多轮追问</text>
 
@@ -29,19 +29,19 @@
   <text x="420" y="466" class="body">/tiguan-assessment-session-design</text>
   <text x="420" y="496" class="body">附加直接调用：问卷 → 课前准备</text>
   <text x="420" y="546" class="body">/tiguan-service-ops</text>
-  <text x="420" y="576" class="body">预览 → 确认 → 执行 → 回读</text>
+  <text x="420" y="576" class="body">口述 → 草稿；有接口再执行</text>
 
   <rect x="700" y="380" width="280" height="250" rx="8" class="card"/>
   <text x="735" y="425" class="head">专业价值可见化</text>
   <text x="735" y="466" class="body">/tiguan-practice-knowledge-base</text>
-  <text x="735" y="496" class="body">来源 · 判断 · 验证状态</text>
-  <text x="735" y="546" class="body">让经验可找、可追溯、可复用</text>
+  <text x="735" y="496" class="body">从当前结果建立第一个条目</text>
+  <text x="735" y="546" class="body">来源 · 判断 · 验证状态</text>
 
   <rect x="1015" y="380" width="315" height="250" rx="8" class="card"/>
   <text x="1050" y="425" class="head">执业系统诊断</text>
   <text x="1050" y="466" class="body">/tiguan-business-review</text>
-  <text x="1050" y="496" class="body">引流 · 预约 · 交付 · 消课</text>
-  <text x="1050" y="546" class="body">缺失 ≠ 0</text>
+  <text x="1050" y="496" class="body">无数据 → 7 天最小采集表</text>
+  <text x="1050" y="546" class="body">有数据 → 缺失 ≠ 0</text>
   <text x="1050" y="576" class="body">一次只找一个优先级</text>
 
   <rect x="110" y="700" width="1180" height="220" rx="8" class="ink"/>

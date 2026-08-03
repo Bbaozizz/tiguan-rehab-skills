@@ -47,6 +47,13 @@ class RouterContractTest(unittest.TestCase):
         self.assertIn("同一对话", self.router)
         self.assertIn("立即开始叶子 Skill 的第一项实质动作", self.router)
 
+    def test_router_assumes_a_zero_infrastructure_first_run(self) -> None:
+        self.assertIn(
+            "默认用户没有个人知识库、客户档案、标准经营表或系统适配器",
+            self.router,
+        )
+        self.assertIn("不得把这些当作首次使用前提", self.router)
+
     def test_assessment_is_direct_additional_capability_not_primary_route(self) -> None:
         self.assertIn("附加的直接调用能力", self.router)
         self.assertIn("/tiguan-assessment-session-design", self.router)

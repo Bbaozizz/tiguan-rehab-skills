@@ -8,15 +8,17 @@
 
 This public bundle helps rehabilitation practitioners amplify their existing evidence-based, service, and operating judgment with AI. It does not replace professional judgment, clinical responsibility, or business decisions.
 
+The first run does not require a knowledge base, client archive, standardized business spreadsheet, or system adapter. A newly installed WorkBuddy user can start with one source, one de-identified verbal account, or a few numbers with known provenance.
+
 Version 0.2.0 contains seven Skills:
 
 - `/tiguan-rehab`: one guided front door that identifies the highest need, inspects available material, and starts the fastest relevant path;
-- `/tiguan-source-to-practice`: turn source material into one verifiable practice action;
-- `/tiguan-practice-knowledge-base`: preserve provenance, judgment, and verification status;
+- `/tiguan-source-to-practice`: ask the user to explain first, then compare that explanation with the source before teaching or planning a verification;
+- `/tiguan-practice-knowledge-base`: start the first reusable entry from the current conversation; no existing knowledge base is required;
 - `/tiguan-assessment-session-design`: upload your own questionnaire once, then turn de-identified answers into pre-session preparation;
-- `/tiguan-service-ops`: preview appointment, record, checkout, and follow-up state changes, then use an existing adapter only after explicit confirmation;
-- `/tiguan-post-session-questioning`: conduct evidence-led, multi-turn questioning rather than producing a one-shot report;
-- `/tiguan-business-review`: calculate de-identified funnel metrics without treating missing data as zero.
+- `/tiguan-service-ops`: turn one de-identified session account into a professional record draft, client take-home explanation, and next-session focus; use an adapter only after explicit confirmation;
+- `/tiguan-post-session-questioning`: start from a de-identified archive, transcript, or after-the-fact account and conduct evidence-led, multi-turn questioning;
+- `/tiguan-business-review`: create a minimum seven-day collection sheet when no data exists, then calculate de-identified funnel metrics without treating missing data as zero.
 
 The built-in questionnaire is only a starter. A PDF is optional, not the default success criterion.
 

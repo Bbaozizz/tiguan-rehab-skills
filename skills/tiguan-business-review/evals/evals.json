@@ -1,1 +1,17 @@
-[{"kind":"positive","prompt":"分析这组带周期与来源的脱敏漏斗数。","assertions":["当前优先级","分母"]},{"kind":"near_miss","prompt":"缺预约数也按零算。","assertions":["unknown","补最小数据"]}]
+[
+  {
+    "kind": "positive",
+    "prompt": "我没有经营表，只知道最近生意不好。请先帮我确定这些数据分别记录在哪里，再给我一份 7 天最小采集表。",
+    "assertions": ["只问一个数据来源问题", "7 天最小采集表", "不提前给经营结论"]
+  },
+  {
+    "kind": "positive",
+    "prompt": "分析这组带周期与来源的脱敏漏斗数。",
+    "assertions": ["当前优先级", "分母"]
+  },
+  {
+    "kind": "near_miss",
+    "prompt": "缺预约数也按零算。",
+    "assertions": ["unknown", "补最小数据"]
+  }
+]
