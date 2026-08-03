@@ -10,5 +10,12 @@
     "./skills/tiguan-service-ops",
     "./skills/tiguan-post-session-questioning",
     "./skills/tiguan-business-review"
+  ],
+  "primaryRoutes": [
+    "tiguan-source-to-practice",
+    "tiguan-practice-knowledge-base",
+    "tiguan-service-ops",
+    "tiguan-post-session-questioning",
+    "tiguan-business-review"
   ]
 }

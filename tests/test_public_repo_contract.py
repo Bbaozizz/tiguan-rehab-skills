@@ -153,6 +153,21 @@ class PublicRepoContractTest(unittest.TestCase):
             all(item["version"] == version for item in marketplace["plugins"])
         )
 
+    def test_manifest_declares_the_five_day_zero_routes(self) -> None:
+        plugin = json.loads(
+            (ROOT / ".claude-plugin/plugin.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            set(plugin["primaryRoutes"]),
+            {
+                "tiguan-source-to-practice",
+                "tiguan-practice-knowledge-base",
+                "tiguan-service-ops",
+                "tiguan-post-session-questioning",
+                "tiguan-business-review",
+            },
+        )
+
     def test_skill_packages_follow_public_skill_contract(self) -> None:
         for name in SKILL_NAMES:
             skill_dir = ROOT / "skills" / name
