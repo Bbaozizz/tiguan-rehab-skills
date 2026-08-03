@@ -113,6 +113,35 @@ def choose_priority(metrics: Dict[str, Dict[str, Any]]) -> Dict[str, str]:
     }
 
 
+def provenance_conflicts(payload: Dict[str, Any]) -> List[str]:
+    """Return explicit metadata conflicts without inventing missing provenance."""
+    conflicts: List[str] = []
+    period = payload.get("period")
+    source_note = payload.get("source_note")
+    definitions = payload.get("metric_definitions")
+    if not isinstance(period, str) or not period.strip():
+        conflicts.append("missing period metadata")
+    if not isinstance(source_note, str) or not source_note.strip():
+        conflicts.append("missing source_note metadata")
+    if not isinstance(definitions, dict):
+        conflicts.append("missing metric_definitions metadata")
+        definitions = {}
+    for _, numerator, denominator, _ in METRICS:
+        for field in (numerator, denominator):
+            if payload.get(field) is not None and not isinstance(definitions.get(field), str):
+                conflicts.append(f"missing metric definition: {field}")
+    declared = payload.get("metadata")
+    if declared is not None:
+        if not isinstance(declared, dict):
+            conflicts.append("metadata must be an object")
+        else:
+            if "period" in declared and declared["period"] != period:
+                conflicts.append("contradictory period metadata")
+            if "source_note" in declared and declared["source_note"] != source_note:
+                conflicts.append("contradictory source metadata")
+    return conflicts
+
+
 def main() -> int:
     args = parse_args()
     try:
@@ -124,6 +153,20 @@ def main() -> int:
         print(
             json.dumps(
                 {"status": "invalid", "errors": ["input root must be an object"]},
+                ensure_ascii=False,
+            )
+        )
+        return 2
+
+    metadata_conflicts = provenance_conflicts(payload)
+    if metadata_conflicts:
+        print(
+            json.dumps(
+                {
+                    "status": "invalid",
+                    "errors": ["invalid metric provenance metadata"],
+                    "metadata_conflicts": metadata_conflicts,
+                },
                 ensure_ascii=False,
             )
         )
