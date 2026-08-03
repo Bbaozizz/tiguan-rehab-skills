@@ -67,6 +67,8 @@
 
 #### macOS
 
+需要系统可用的 Python 3；安装器会在下载或写入前检查并给出明确错误。
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.sh | bash
 ```

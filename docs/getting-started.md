@@ -18,6 +18,8 @@
 
 WorkBuddy macOS：
 
+前提：系统命令行可运行 `python3`；安装器会在写入前检查。
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Bbaozizz/tiguan-rehab-skills/main/tools/install-workbuddy.sh | bash
 ```

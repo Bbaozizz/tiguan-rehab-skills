@@ -16,8 +16,12 @@ class WorkBuddyWindowsContractTest(unittest.TestCase):
     def test_powershell_installer_manages_only_the_public_skills(self) -> None:
         script = INSTALLER.read_text(encoding="utf-8")
 
-        self.assertIn("tools/skill_registry.py", script)
+        self.assertIn("ConvertFrom-Json", script)
+        self.assertNotIn("& python", script)
         self.assertIn("Resolve-Path", script)
+        self.assertIn("duplicate", script.lower())
+        self.assertIn("primaryRoutes", script)
+        self.assertLess(script.index("Installation verification failed"), script.index("catch {"))
         self.assertNotIn("$SkillNames = @(\n    \"tiguan-rehab\"", script)
         self.assertIn(".workbuddy", script)
         self.assertIn("SKILL.md", script)

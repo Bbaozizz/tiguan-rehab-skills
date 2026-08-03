@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -50,7 +51,7 @@ def read_number(payload: Dict[str, Any], field: str, errors: List[str]) -> Optio
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         errors.append(f"{field} must be a non-negative number")
         return None
-    if value < 0:
+    if not math.isfinite(value) or value < 0:
         errors.append(f"{field} must be a non-negative number")
         return None
     return float(value)

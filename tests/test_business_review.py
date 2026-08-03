@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import math
 import subprocess
 import tempfile
 import unittest
@@ -104,6 +105,16 @@ class BusinessReviewTest(unittest.TestCase):
             )
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("missing metric definition: inquiries", output["metadata_conflicts"])
+
+    def test_non_finite_numbers_are_rejected_without_nonstandard_json(self) -> None:
+        for value in [math.nan, math.inf, -math.inf]:
+            result, output = self.run_case(
+                {"period": "2026-07", **self.metadata(), "inquiries": value}
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual(output["status"], "invalid")
+            self.assertNotIn("NaN", result.stdout)
+            self.assertNotIn("Infinity", result.stdout)
 
 
 if __name__ == "__main__":

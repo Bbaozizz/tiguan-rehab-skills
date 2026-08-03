@@ -65,16 +65,32 @@ try {
         $RepoRoot = $ExtractedRoots[0].FullName
     }
 
-    $RegistryScript = Join-Path $RepoRoot "tools/skill_registry.py"
-    if (-not (Test-Path -LiteralPath $RegistryScript -PathType Leaf)) {
-        throw "Invalid package: missing tools/skill_registry.py"
+    $ManifestPath = Join-Path $RepoRoot ".claude-plugin/plugin.json"
+    if (-not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) {
+        throw "Invalid package: missing .claude-plugin/plugin.json"
     }
-    $SkillNames = @(& python $RegistryScript --repo-root $RepoRoot --published-skill-ids)
-    if ($LASTEXITCODE -ne 0) {
-        throw "Invalid package: strict skill registry validation failed"
-    }
+    $Manifest = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
+    $SkillNames = @($Manifest.skills)
     if ($SkillNames.Count -eq 0) {
         throw "Invalid package: .claude-plugin/plugin.json declares no skills"
+    }
+    foreach ($Name in $SkillNames) {
+        if ($Name -isnot [string] -or $Name -notmatch '^\./skills/[a-z0-9]+(?:-[a-z0-9]+)*$') {
+            throw "Invalid package: malformed published Skill path"
+        }
+    }
+    $SkillNames = @($SkillNames | ForEach-Object { $_.Substring("./skills/".Length) })
+    if (@($SkillNames | Select-Object -Unique).Count -ne $SkillNames.Count) {
+        throw "Invalid package: duplicate published Skill ID"
+    }
+    $PrimaryRoutes = @($Manifest.primaryRoutes)
+    if ($PrimaryRoutes.Count -ne 5 -or @($PrimaryRoutes | Select-Object -Unique).Count -ne 5) {
+        throw "Invalid package: primaryRoutes must contain exactly five unique IDs"
+    }
+    foreach ($Route in $PrimaryRoutes) {
+        if ($Route -notin $SkillNames) {
+            throw "Invalid package: undeclared primaryRoutes ID: $Route"
+        }
     }
 
     foreach ($Name in $SkillNames) {

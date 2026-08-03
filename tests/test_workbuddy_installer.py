@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+import os
 from pathlib import Path
 
 import sys
@@ -121,6 +122,32 @@ class WorkBuddyInstallerTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertFalse(outside_target.exists())
             self.assertFalse((workbuddy_home / "skills").exists())
+
+    def test_missing_python_reports_clear_prerequisite_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            result = subprocess.run(
+                ["/bin/bash", str(INSTALLER), "--source-dir", str(ROOT),
+                 "--workbuddy-home", str(Path(temp_dir) / ".workbuddy")],
+                env={**os.environ, "PATH": str(Path(temp_dir) / "empty")},
+                check=False, capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("python3 is required", result.stderr)
+
+    def test_verification_failure_rolls_back_and_cleans_staging(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            home = Path(temp_dir) / ".workbuddy"
+            old = home / "skills/tiguan-rehab/SKILL.md"
+            old.parent.mkdir(parents=True)
+            old.write_text("old managed skill", encoding="utf-8")
+            result = subprocess.run(
+                ["bash", str(INSTALLER), "--source-dir", str(ROOT), "--workbuddy-home", str(home)],
+                env={**os.environ, "TIGUAN_INSTALLER_TEST_FAIL_VERIFICATION": "1"},
+                check=False, capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual(old.read_text(encoding="utf-8"), "old managed skill")
+            self.assertEqual(list((home / "skills").glob(".tiguan-install.*")), [])
 
 
 if __name__ == "__main__":
