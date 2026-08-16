@@ -230,6 +230,9 @@ class PublicRepoContractTest(unittest.TestCase):
                 "预约转化",
                 "交付效率",
                 "消课闭环",
+                "现金到账 ≠ 已交付收入 ≠ 利润",
+                "老板工资线",
+                "产能门禁",
             ],
         }
         for name, markers in expected_markers.items():

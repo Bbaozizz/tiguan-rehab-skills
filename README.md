@@ -4,7 +4,7 @@
 
 > 让真正的康复，不再被埋没。
 
-[![Version](https://img.shields.io/badge/version-0.2.1-17352D.svg?style=flat-square)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.2.2-17352D.svg?style=flat-square)](VERSION)
 [![skills.sh](https://skills.sh/b/Bbaozizz/tiguan-rehab-skills)](https://skills.sh/Bbaozizz/tiguan-rehab-skills)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC%204.0-B1462F.svg?style=flat-square)](LICENSE)
 
@@ -14,7 +14,7 @@
 
 **第一次使用不需要先有知识库、客户档案、标准经营表或系统接口。**刚装好 WorkBuddy 的人，只要能提供一份资料、一段脱敏口述或几个经营数字，就能在当前对话里得到第一份可审核结果。现成系统只决定能不能继续自动写入，不决定能不能开始。
 
-**v0.2.1 已发布 7 个 Skill：**`/tiguan-rehab` 是唯一 Day-0 前门，面向五条高频结果路径；评估问卷与课前准备是附加的直接调用能力。规划中的能力不等于已经可安装。
+**v0.2.2 已发布 7 个 Skill：**`/tiguan-rehab` 是唯一 Day-0 前门，面向五条高频结果路径；本次把经营分析升级为运动健康行业轻量 CFO。评估问卷与课前准备是附加的直接调用能力。规划中的能力不等于已经可安装。
 
 ![体观康复 Skills 完整能力地图与当前开放状态](docs/skill-map.svg)
 
@@ -59,7 +59,7 @@
 | `/tiguan-assessment-session-design` | 上传自己的问卷，再用问卷答案生成课前准备 |
 | `/tiguan-service-ops` | 没有档案也能把一次脱敏口述变成记录草稿、客户回家说明和下次关注点 |
 | `/tiguan-post-session-questioning` | 没有档案也可口述开始；不交一份报告，一次只追一个知行落差 |
-| `/tiguan-business-review` | 没数据先建 7 天最小采集表；有数据再找一个当前经营优先级 |
+| `/tiguan-business-review` | 没数据先建 7 天采集口径；有数据算现金、交付、剩课责任、三条经营线、现实产能和一个当前优先级 |
 
 它们分别覆盖四个长期能力簇：**实践认知校准**、**可验证服务设计**、**专业价值可见化**、**执业系统诊断**。
 

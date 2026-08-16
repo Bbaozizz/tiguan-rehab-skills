@@ -94,8 +94,15 @@ class LeafSkillContractTest(unittest.TestCase):
 
     def test_business_review_keeps_missing_data_unknown(self) -> None:
         text = (ROOT / "skills/tiguan-business-review/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("未检查不能记0", text)
-        self.assertIn("缺失业务数据保持 `unknown`", text)
+        for marker in [
+            "未检查不能记0",
+            "缺失业务数据保持 `unknown`",
+            "现金到账 ≠ 已交付收入 ≠ 利润",
+            "三笔钱：现金收入 / 已交付收入 / 剩课预收负债",
+            "三条线：不关门线 / 老板工资线 / 健康经营线",
+            "产能门禁",
+        ]:
+            self.assertIn(marker, text)
 
     def test_business_review_owns_the_zero_data_collection_path(self) -> None:
         text = (ROOT / "skills/tiguan-business-review/SKILL.md").read_text(encoding="utf-8")
