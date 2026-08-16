@@ -1,4 +1,4 @@
 interface:
-  display_name: "经营分析"
-  short_description: "Collect minimum business data or find the current bottleneck"
-  default_prompt: "Use $tiguan-business-review to create a minimum seven-day collection sheet if I have no data, or analyze my de-identified operating data and find one next priority."
+  display_name: "运动健康行业 CFO"
+  short_description: "没数据先建口径；有数据算三笔钱、三条线、剩课责任与现实产能"
+  default_prompt: "Use $tiguan-business-review to create a minimum seven-day collection sheet if I have no data, or audit my de-identified health-service business data and identify one current operating priority."

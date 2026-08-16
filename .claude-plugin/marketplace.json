@@ -3,15 +3,15 @@
   "owner": {"name": "Tguan Rehabilitation"},
   "metadata": {
     "description": "体观康复公开 Skills：学习、知识库、评估、运营、质询与经营分析组合包。",
-    "version": "0.2.1"
+    "version": "0.2.2"
   },
   "plugins": [
-    {"name":"tiguan-rehab","description":"体观康复 Skills 统一入口。","source":"./","strict":true,"version":"0.2.1","category":"healthcare-workflow","keywords":["rehabilitation","workflow","chinese"]},
-    {"name":"tiguan-assessment-session-design","description":"设置自己的评估问卷并用脱敏答卷做课前准备。","source":"./skills/tiguan-assessment-session-design","strict":true,"version":"0.2.1","category":"healthcare-workflow","keywords":["rehabilitation","assessment","questionnaire"]},
-    {"name":"tiguan-source-to-practice","description":"将专业资料转成可验证的实践动作。","source":"./skills/tiguan-source-to-practice","strict":true,"version":"0.2.1","category":"education","keywords":["evidence","learning","practice"]},
-    {"name":"tiguan-practice-knowledge-base","description":"建立保留来源与验证状态的个人工作知识库。","source":"./skills/tiguan-practice-knowledge-base","strict":true,"version":"0.2.1","category":"productivity","keywords":["knowledge-base","provenance","practice"]},
-    {"name":"tiguan-service-ops","description":"安全预览并通过已配置适配器执行客户服务运营。","source":"./skills/tiguan-service-ops","strict":true,"version":"0.2.1","category":"healthcare-workflow","keywords":["appointment","record","checkout","follow-up"]},
-    {"name":"tiguan-post-session-questioning","description":"用证据驱动的多轮追问找到知行落差。","source":"./skills/tiguan-post-session-questioning","strict":true,"version":"0.2.1","category":"education","keywords":["questioning","reflection","evidence"]},
-    {"name":"tiguan-business-review","description":"计算脱敏经营漏斗并找到当前优先级。","source":"./skills/tiguan-business-review","strict":true,"version":"0.2.1","category":"business","keywords":["business","funnel","operations"]}
+    {"name":"tiguan-rehab","description":"体观康复 Skills 统一入口。","source":"./","strict":true,"version":"0.2.2","category":"healthcare-workflow","keywords":["rehabilitation","workflow","chinese"]},
+    {"name":"tiguan-assessment-session-design","description":"设置自己的评估问卷并用脱敏答卷做课前准备。","source":"./skills/tiguan-assessment-session-design","strict":true,"version":"0.2.2","category":"healthcare-workflow","keywords":["rehabilitation","assessment","questionnaire"]},
+    {"name":"tiguan-source-to-practice","description":"将专业资料转成可验证的实践动作。","source":"./skills/tiguan-source-to-practice","strict":true,"version":"0.2.2","category":"education","keywords":["evidence","learning","practice"]},
+    {"name":"tiguan-practice-knowledge-base","description":"建立保留来源与验证状态的个人工作知识库。","source":"./skills/tiguan-practice-knowledge-base","strict":true,"version":"0.2.2","category":"productivity","keywords":["knowledge-base","provenance","practice"]},
+    {"name":"tiguan-service-ops","description":"安全预览并通过已配置适配器执行客户服务运营。","source":"./skills/tiguan-service-ops","strict":true,"version":"0.2.2","category":"healthcare-workflow","keywords":["appointment","record","checkout","follow-up"]},
+    {"name":"tiguan-post-session-questioning","description":"用证据驱动的多轮追问找到知行落差。","source":"./skills/tiguan-post-session-questioning","strict":true,"version":"0.2.2","category":"education","keywords":["questioning","reflection","evidence"]},
+    {"name":"tiguan-business-review","description":"没数据先建口径；有数据计算三笔钱、三条线、剩课责任、现实产能与经营优先级。","source":"./skills/tiguan-business-review","strict":true,"version":"0.2.2","category":"business","keywords":["business","finance","capacity","funnel","operations"]}
   ]
 }

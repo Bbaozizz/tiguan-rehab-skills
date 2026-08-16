@@ -12,7 +12,7 @@
 4. `/tiguan-assessment-session-design`：问卷设置与答卷课前准备；
 5. `/tiguan-service-ops`：单次服务记录草稿、客户回家说明与可选系统运营；
 6. `/tiguan-post-session-questioning`：档案或事后口述驱动的多轮质询；
-7. `/tiguan-business-review`：最小数据采集与脱敏经营漏斗分析。
+7. `/tiguan-business-review`：最小数据采集、三笔钱、三条经营线、剩课责任、现实产能与脱敏经营漏斗分析。
 
 它们服务四个长期能力簇：实践认知校准、可验证服务设计、专业价值可见化、执业系统诊断。
 

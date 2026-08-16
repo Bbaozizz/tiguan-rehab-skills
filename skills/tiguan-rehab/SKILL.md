@@ -33,7 +33,7 @@ description: 体观康复公开 Skills 的唯一 Day-0 引导入口。只依据�
 | 让 AI 下次能复用这次有价值的结果 | `/tiguan-practice-knowledge-base` | 从当前对话建立第一个含来源与验证状态的最小条目 |
 | 一次服务结束后快速整理清楚 | `/tiguan-service-ops` | 没有档案也能从脱敏口述生成记录草稿、客户回家说明与未执行状态 |
 | 深挖一次已完成服务的知行落差 | `/tiguan-post-session-questioning` | 没有档案时也可从脱敏复述开始，并一次只追一个问题 |
-| 找一个经营数据断点 | `/tiguan-business-review` | 有数据就计算；没有数据就生成 7 天最小采集表与口径 |
+| 测算独立经营目标，或找当前经营断点 | `/tiguan-business-review` | 没数据先建 7 天采集口径；有数据再算三笔钱、三条线、剩课责任、现实产能与一个优先级 |
 
 `/tiguan-assessment-session-design` 是附加的直接调用能力：当用户明确要设置问卷或用脱敏答卷做课前准备时可直接使用；它不是 Day-0 五条主路径之一。
 
